@@ -4,18 +4,39 @@
     ViewBag.Title = "Home Page";
 }
 
+
+
+<style type="text/css">
+    .clickable-row {
+        cursor: pointer;
+    }
+</style>
+
+<div class="btn">
+    <input type="button" value="Computers" onclick="location.href='@Url.Action("Index", new { TypeFilter = "Computers" } ) '" />
+    <input type="button" value="Servers" onclick="location.href='@Url.Action("Index", new { TypeFilter = "Servers" } ) '" />
+</div>
+
 <div class="table-responsive">
-    <table class="table">
+    <table class="table table-bordered table-condensed table-striped table-hover">
+        <tr>
+            @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
+            {
+                <th style="text-align: center" >@property.Name</th>
+            }
+        </tr>
+
         @foreach (var item in Model)
         {
-            <tr>
-               @foreach (var property in ViewBag.properties)
+            <tr class="clickable-row" onclick="document.location='@Url.Action("Details", "Home", new { id = item.ComputerID })';">
+               
+                @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
                {
-                <td>@item.ComputerID</td>
-                <td>@item.Model</td>
+                <td>@property.GetValue(item, null)</td>
                }
                 
             </tr>
         }
     </table>
 </div>
+

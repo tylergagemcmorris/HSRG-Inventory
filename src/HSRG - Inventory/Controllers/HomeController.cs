@@ -15,12 +15,31 @@ namespace HSRG___Inventory.Controllers
     {
         private Context db = new Context("InventoryDetails");
 
-        public ActionResult Index()
+        public ActionResult Index(string TypeFilter, string SortBy)
         {
             PropertyInfo[] properties = typeof(HSRG___Inventory.Models.InventoryDetail).GetProperties();
             ViewBag.properties = properties;
-            return View(db.InventoryDetails.ToList());
+
+            ViewBag.SortBy = SortBy;
+            ViewBag.ShowType = TypeFilter;
+            var details = from s in db.InventoryDetails
+                          select s;
+            switch (TypeFilter)
+            {
+                case "Computers":
+                    details = details.Where(s => s.ComputerID == "HSRG-100H2");
+                    break;
+                case "Servers":
+                    details = details.Where(s => s.ComputerID == "HSRG-100H3");
+                    break;
+                default:
+                    break;
+            }
+
+            return View(details.ToList());
         }
+
+
 
         public ActionResult Details(string id)
         {
