@@ -1,0 +1,21 @@
+﻿@model IEnumerable<HSRG___Inventory.Models.InventoryDetail>
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="table-responsive">
+    <table class="table">
+        @foreach (var item in Model)
+        {
+            <tr>
+               @foreach (var property in ViewBag.properties)
+               {
+                <td>@item.ComputerID</td>
+                <td>@item.Model</td>
+               }
+                
+            </tr>
+        }
+    </table>
+</div>
