@@ -166,7 +166,15 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Context.cs" />
+    <Compile Include="Models\BIOSInformation.cs" />
+    <Compile Include="Models\DriveSpace.cs" />
+    <Compile Include="Models\HardDiskInformation.cs" />
     <Compile Include="Models\InventoryDetail.cs" />
+    <Compile Include="Models\MemoryInformation.cs" />
+    <Compile Include="Models\MotherBoardInformation.cs" />
+    <Compile Include="Models\NetworkAdapters.cs" />
+    <Compile Include="Models\SystemEnclosure.cs" />
+    <Compile Include="Models\SystemInformation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
