@@ -6,6 +6,7 @@ using System.Web;
 using System.Data.SQLite;
 using SQLite.CodeFirst;
 
+//this is a test comment
 namespace HSRG___Inventory
 {
     public class Context : DbContext
