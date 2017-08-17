@@ -67,6 +67,7 @@ namespace HSRG___Inventory.Controllers
         {
             PropertyInfo[] properties = typeof(HSRG___Inventory.Models.BIOSInformation).GetProperties();
             ViewBag.properties = properties;
+            ViewBag.Title = "BIOS Information";
 
             return PartialView("~/Views/Table/BiosInformation.cshtml", db.BIOSInformation.First(s => s.ComputerID == id));
         }
@@ -76,6 +77,7 @@ namespace HSRG___Inventory.Controllers
         {
             PropertyInfo[] properties = typeof(HSRG___Inventory.Models.MemoryInformation).GetProperties();
             ViewBag.properties = properties;
+            ViewBag.Title = "Memory Information";
 
             return PartialView("~/Views/Table/MemoryInformation.cshtml", db.MemoryInformation.First(s => s.ComputerID == id));
         }
@@ -85,6 +87,7 @@ namespace HSRG___Inventory.Controllers
         {
             PropertyInfo[] properties = typeof(HSRG___Inventory.Models.SystemInformation).GetProperties();
             ViewBag.properties = properties;
+            ViewBag.Title = "System Information";
 
             return PartialView("~/Views/Table/SystemInformation.cshtml", db.SystemInformation.First(s => s.ComputerID == id));
         }
@@ -94,6 +97,7 @@ namespace HSRG___Inventory.Controllers
         {
             PropertyInfo[] properties = typeof(HSRG___Inventory.Models.HardDiskInformation).GetProperties();
             ViewBag.properties = properties;
+            ViewBag.Title = "Hard Disk Information";
 
             return PartialView("~/Views/Table/HardDiskInformation.cshtml", db.HardDiskInformation.First(s => s.ComputerID == id));
         }
@@ -103,6 +107,7 @@ namespace HSRG___Inventory.Controllers
         {
             PropertyInfo[] properties = typeof(HSRG___Inventory.Models.MotherBoardInformation).GetProperties();
             ViewBag.properties = properties;
+            ViewBag.Title = "MotherBoard Information";
 
             return PartialView("~/Views/Table/MotherBoardInformation.cshtml", db.MotherBoardInformation.First(s => s.ComputerID == id));
         }
@@ -112,6 +117,7 @@ namespace HSRG___Inventory.Controllers
         {
             PropertyInfo[] properties = typeof(HSRG___Inventory.Models.SystemEnclosure).GetProperties();
             ViewBag.properties = properties;
+            ViewBag.Title = "System Enclosure";
 
             return PartialView("~/Views/Table/SystemEnclosure.cshtml", db.SystemEnclosure.First(s => s.ComputerID == id));
         }
@@ -121,6 +127,7 @@ namespace HSRG___Inventory.Controllers
         {
             PropertyInfo[] properties = typeof(HSRG___Inventory.Models.DriveSpace).GetProperties();
             ViewBag.properties = properties;
+            ViewBag.Title = "Drive Space";
 
             return PartialView("~/Views/Table/DriveSpace.cshtml", db.DriveSpace.First(s => s.ComputerID == id));
         }
@@ -130,6 +137,7 @@ namespace HSRG___Inventory.Controllers
         {
             PropertyInfo[] properties = typeof(HSRG___Inventory.Models.NetworkAdapters).GetProperties();
             ViewBag.properties = properties;
+            ViewBag.Title = "Network Adapters";
 
             return PartialView("~/Views/Table/NetworkAdapters.cshtml", db.NetworkAdapters.First(s => s.ComputerID == id));
         }
