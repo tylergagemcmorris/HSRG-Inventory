@@ -24,12 +24,12 @@ namespace HSRG___Inventory
         public virtual DbSet<InventoryDetail> InventoryDetails { get; set; }
         public virtual DbSet<BIOSInformation> BIOSInformation { get; set; }
         public virtual DbSet<MemoryInformation> MemoryInformation { get; set; }
-        public virtual DbSet<MemoryInformation> DriveSpace { get; set; }
-        public virtual DbSet<MemoryInformation> HardDiskInformation { get; set; }
-        public virtual DbSet<MemoryInformation> MotherBoardInformation { get; set; }
-        public virtual DbSet<MemoryInformation> NetworkAdapters { get; set; }
-        public virtual DbSet<MemoryInformation> SystemEnclosure { get; set; }
-        public virtual DbSet<MemoryInformation> SystemInformation { get; set; }
+        public virtual DbSet<DriveSpace> DriveSpace { get; set; }
+        public virtual DbSet<HardDiskInformation> HardDiskInformation { get; set; }
+        public virtual DbSet<MotherBoardInformation> MotherBoardInformation { get; set; }
+        public virtual DbSet<NetworkAdapters> NetworkAdapters { get; set; }
+        public virtual DbSet<SystemEnclosure> SystemEnclosure { get; set; }
+        public virtual DbSet<SystemInformation> SystemInformation { get; set; }
 
     }
 
