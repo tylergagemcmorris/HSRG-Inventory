@@ -79,5 +79,14 @@ namespace HSRG___Inventory.Controllers
 
             return PartialView("~/Views/Table/MemoryInformation.cshtml", db.MemoryInformation.First(s => s.ComputerID == id));
         }
+
+        [ChildActionOnly]
+        public ActionResult PartialSystem(string id)
+        {
+            PropertyInfo[] properties = typeof(HSRG___Inventory.Models.SystemInformation).GetProperties();
+            ViewBag.properties = properties;
+
+            return PartialView("~/Views/Table/SystemInformation.cshtml", db.SystemInformation.First(s => s.ComputerID == id));
+        }
     }
 }

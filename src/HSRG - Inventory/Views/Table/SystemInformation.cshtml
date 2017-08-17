@@ -1,0 +1,20 @@
+﻿@model HSRG___Inventory.Models.SystemInformation
+
+<div>
+    <table class="table-bordered">
+        <tr>
+            @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
+            {
+                <th>@property.Name</th>
+            }
+        </tr>
+
+        <tr>
+
+            @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
+            {
+                <td>@property.GetValue(Model, null)</td>
+            }
+        </tr>
+    </table>
+</div>
