@@ -220,6 +220,7 @@
     <Content Include="Views\Table\MemoryInformation.cshtml" />
     <Content Include="Views\Table\SystemInformation.cshtml" />
     <Content Include="Views\Table\HardDiskInformation.cshtml" />
+    <Content Include="Views\Table\MotherBoardInformation.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

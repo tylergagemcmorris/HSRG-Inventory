@@ -5,10 +5,12 @@
 <h2>Computer name here</h2>
 <h3>@ViewBag.Message</h3>
 
-@Html.Action("PartialBios", new { id = ViewBag.id})
+@Html.Action("PartialMotherBoard", new { id = ViewBag.id })
 <br />
-@Html.Action("PartialMemory", new { id = ViewBag.id })
+@Html.Action("PartialBios", new { id = ViewBag.id})
 <br />
 @Html.Action("PartialSystem", new { id = ViewBag.id })
 <br />
 @Html.Action("PartialHardDisk", new { id = ViewBag.id })
+<br />
+@Html.Action("PartialMemory", new { id = ViewBag.id })

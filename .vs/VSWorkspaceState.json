@@ -1,8 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\src"
+    "\\src",
+    "\\src\\HSRG - Inventory",
+    "\\src\\HSRG - Inventory\\Controllers"
   ],
-  "SelectedNode": "\\src",
+  "SelectedNode": "\\src\\HSRG - Inventory\\Controllers\\HomeController.cs",
   "PreviewInSolutionExplorer": false
 }

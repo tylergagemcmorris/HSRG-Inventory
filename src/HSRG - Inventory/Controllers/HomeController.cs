@@ -97,5 +97,14 @@ namespace HSRG___Inventory.Controllers
 
             return PartialView("~/Views/Table/HardDiskInformation.cshtml", db.HardDiskInformation.First(s => s.ComputerID == id));
         }
+
+        [ChildActionOnly]
+        public ActionResult PartialMotherBoard(string id)
+        {
+            PropertyInfo[] properties = typeof(HSRG___Inventory.Models.MotherBoardInformation).GetProperties();
+            ViewBag.properties = properties;
+
+            return PartialView("~/Views/Table/MotherBoardInformation.cshtml", db.MotherBoardInformation.First(s => s.ComputerID == id));
+        }
     }
 }
