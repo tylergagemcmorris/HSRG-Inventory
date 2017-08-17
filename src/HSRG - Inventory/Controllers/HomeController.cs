@@ -52,7 +52,13 @@ namespace HSRG___Inventory.Controllers
             {
                 return HttpNotFound();
             }
-            return View(InventoryDetails);
+
+
+            PropertyInfo[] properties = typeof(HSRG___Inventory.Models.BIOSInformation).GetProperties();
+            ViewBag.properties = properties;
+            var BIOSInfo = db.BIOSInformation.First(s => s.ComputerID == id);
+
+            return View(BIOSInfo);
         }
     }
 }
