@@ -12,7 +12,7 @@
                 {
                     if (property.Name != "ComputerID")
                     {
-                        <th>@property.Name</th>
+                        <th style="text-align: center">@property.Name</th>
                         length = property.GetValue(Model, null).ToString().Split(new string[] { Environment.NewLine }, StringSplitOptions.None).Length - 1;
                     }
                 }
@@ -25,7 +25,7 @@
                         if (property.Name != "ComputerID")
                         {
                             var words = property.GetValue(Model, null).ToString().Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
-                            <td>@words[i]</td>
+                            <td style="text-align: center">@words[i]</td>
                         }
                     }
                 </tr>
