@@ -129,7 +129,7 @@ namespace HSRG___Inventory.Controllers
             ViewBag.properties = properties;
             ViewBag.Title = "Drive Space";
 
-            return PartialView("~/Views/Table/DriveSpace.cshtml", db.DriveSpace.First(s => s.ComputerID == id));
+            return PartialView("~/Views/Table/DriveSpace.cshtml", db.DriveSpace.First(s => s.ComputerID == id)); //Error: Input string not in correct format
         }
 
         [ChildActionOnly]
