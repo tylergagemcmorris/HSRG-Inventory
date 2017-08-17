@@ -3,8 +3,13 @@
     "",
     "\\src",
     "\\src\\HSRG - Inventory",
-    "\\src\\HSRG - Inventory\\Controllers"
+    "\\src\\HSRG - Inventory\\App_Start",
+    "\\src\\HSRG - Inventory\\Controllers",
+    "\\src\\HSRG - Inventory\\Views",
+    "\\src\\HSRG - Inventory\\Views\\Home",
+    "\\src\\HSRG - Inventory\\Views\\Shared",
+    "\\src\\HSRG - Inventory\\Views\\Table"
   ],
-  "SelectedNode": "\\src\\HSRG - Inventory\\Controllers\\HomeController.cs",
+  "SelectedNode": "\\src\\HSRG - Inventory.sln",
   "PreviewInSolutionExplorer": false
 }

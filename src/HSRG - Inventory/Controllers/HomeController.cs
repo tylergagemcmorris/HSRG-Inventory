@@ -106,5 +106,32 @@ namespace HSRG___Inventory.Controllers
 
             return PartialView("~/Views/Table/MotherBoardInformation.cshtml", db.MotherBoardInformation.First(s => s.ComputerID == id));
         }
+
+        [ChildActionOnly]
+        public ActionResult PartialSystemEnclosure(string id)
+        {
+            PropertyInfo[] properties = typeof(HSRG___Inventory.Models.SystemEnclosure).GetProperties();
+            ViewBag.properties = properties;
+
+            return PartialView("~/Views/Table/SystemEnclosure.cshtml", db.SystemEnclosure.First(s => s.ComputerID == id)); //Error because of null values; Chassis types should be chassis type
+        }
+
+        [ChildActionOnly]
+        public ActionResult PartialDriveSpace(string id)
+        {
+            PropertyInfo[] properties = typeof(HSRG___Inventory.Models.DriveSpace).GetProperties();
+            ViewBag.properties = properties;
+
+            return PartialView("~/Views/Table/DriveSpace.cshtml", db.DriveSpace.First(s => s.ComputerID == id)); //Error about input string being formatted incorrectly
+        }
+
+        [ChildActionOnly]
+        public ActionResult PartialNetwork(string id)
+        {
+            PropertyInfo[] properties = typeof(HSRG___Inventory.Models.NetworkAdapters).GetProperties();
+            ViewBag.properties = properties;
+
+            return PartialView("~/Views/Table/NetworkAdapters.cshtml", db.NetworkAdapters.First(s => s.ComputerID == id));
+        }
     }
 }

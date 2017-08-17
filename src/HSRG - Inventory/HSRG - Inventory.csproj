@@ -221,6 +221,9 @@
     <Content Include="Views\Table\SystemInformation.cshtml" />
     <Content Include="Views\Table\HardDiskInformation.cshtml" />
     <Content Include="Views\Table\MotherBoardInformation.cshtml" />
+    <Content Include="Views\Table\SystemEnclosure.cshtml" />
+    <Content Include="Views\Table\DriveSpace.cshtml" />
+    <Content Include="Views\Table\NetworkAdapters.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
