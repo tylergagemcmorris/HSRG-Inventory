@@ -113,7 +113,7 @@ namespace HSRG___Inventory.Controllers
             PropertyInfo[] properties = typeof(HSRG___Inventory.Models.SystemEnclosure).GetProperties();
             ViewBag.properties = properties;
 
-            return PartialView("~/Views/Table/SystemEnclosure.cshtml", db.SystemEnclosure.First(s => s.ComputerID == id)); //Error because of null values
+            return PartialView("~/Views/Table/SystemEnclosure.cshtml", db.SystemEnclosure.First(s => s.ComputerID == id));
         }
 
         [ChildActionOnly]
@@ -122,7 +122,7 @@ namespace HSRG___Inventory.Controllers
             PropertyInfo[] properties = typeof(HSRG___Inventory.Models.DriveSpace).GetProperties();
             ViewBag.properties = properties;
 
-            return PartialView("~/Views/Table/DriveSpace.cshtml", db.DriveSpace.First(s => s.ComputerID == id)); //Error about input string being formatted incorrectly
+            return PartialView("~/Views/Table/DriveSpace.cshtml", db.DriveSpace.First(s => s.ComputerID == id));
         }
 
         [ChildActionOnly]
