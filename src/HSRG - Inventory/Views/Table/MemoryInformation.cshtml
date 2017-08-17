@@ -1,0 +1,37 @@
+﻿@model HSRG___Inventory.Models.MemoryInformation
+
+<div>
+    <table class="table-bordered">
+        <tr>
+            @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
+            {
+                if (property.Name != "ComputerID")
+                {
+                    <th>@property.Name</th>
+                }
+            }
+        </tr>
+
+        <tr>
+
+            @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
+            {
+                if (property.Name != "ComputerID")
+                {
+                    var words = property.GetValue(Model, null).ToString().Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
+                    <td>@words[0]</td>
+                }
+            }
+        </tr>
+            <tr>
+                @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
+                {
+                    if (property.Name != "ComputerID")
+                    {
+                        var words = property.GetValue(Model, null).ToString().Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
+                        <td>@words[1]</td>
+                    }
+                }
+            </tr>
+    </table>
+</div>

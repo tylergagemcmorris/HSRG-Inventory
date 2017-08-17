@@ -23,6 +23,7 @@ namespace HSRG___Inventory
 
         public virtual DbSet<InventoryDetail> InventoryDetails { get; set; }
         public virtual DbSet<BIOSInformation> BIOSInformation { get; set; }
+        public virtual DbSet<MemoryInformation> MemoryInformation { get; set; }
     }
 
 }

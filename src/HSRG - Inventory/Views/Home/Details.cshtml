@@ -1,28 +1,10 @@
-﻿@model HSRG___Inventory.Models.BIOSInformation
-
+﻿
 @{
     ViewBag.Title = "Details";
 }
-<h2>@Model.ComputerID</h2>
+<h2>Computer name here</h2>
 <h3>@ViewBag.Message</h3>
 
-<div>
-    <table class="table-bordered">
-        <tr>
-            @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
-            {
-                <th>@property.Name</th>
-            }
-        </tr>
-       
-        <tr>
-           
-            @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
-            {
-                <td>@property.GetValue(Model, null)</td>
-            }
-        </tr>
+@Html.Action("PartialBios", new { id = ViewBag.id})
 
-    </table>
-</div>
-
+@Html.Action("PartialMemory", new { id = ViewBag.id })

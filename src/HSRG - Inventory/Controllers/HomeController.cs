@@ -53,12 +53,31 @@ namespace HSRG___Inventory.Controllers
                 return HttpNotFound();
             }
 
+            ViewBag.id = id;
 
             PropertyInfo[] properties = typeof(HSRG___Inventory.Models.BIOSInformation).GetProperties();
             ViewBag.properties = properties;
-            var BIOSInfo = db.BIOSInformation.First(s => s.ComputerID == id);
+            //var BIOSInfo = db.BIOSInformation.First(s => s.ComputerID == id);
 
-            return View(BIOSInfo);
+            return View();
+        }
+
+        [ChildActionOnly]
+        public ActionResult PartialBios(string id)
+        {
+            PropertyInfo[] properties = typeof(HSRG___Inventory.Models.BIOSInformation).GetProperties();
+            ViewBag.properties = properties;
+
+            return PartialView("~/Views/Table/BiosInformation.cshtml", db.BIOSInformation.First(s => s.ComputerID == id));
+        }
+
+        [ChildActionOnly]
+        public ActionResult PartialMemory(string id)
+        {
+            PropertyInfo[] properties = typeof(HSRG___Inventory.Models.MemoryInformation).GetProperties();
+            ViewBag.properties = properties;
+
+            return PartialView("~/Views/Table/MemoryInformation.cshtml", db.MemoryInformation.First(s => s.ComputerID == id));
         }
     }
 }

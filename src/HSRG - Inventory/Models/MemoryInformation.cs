@@ -14,11 +14,11 @@ namespace HSRG___Inventory.Models
         public string ComputerID { get; set; }
         public string BankLabel { get; set; }
         public string DeviceLocator { get; set; }
-        public decimal Capacity { get; set; }
+        public string Capacity { get; set; }
         public string Manufacturer { get; set; }
         public string PartNumber { get; set; }
-        public int SerialNumber { get; set; }
-        public int Speed { get; set; }
+        public string SerialNumber { get; set; }
+        public string Speed { get; set; }
 
     }
 }

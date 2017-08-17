@@ -16,7 +16,7 @@ namespace HSRG___Inventory.Models
         public string Manufacturer { get; set; }
         public string Description { get; set; }
         public string AdapterType { get; set; }
-        public int Speed { get; set; }
+        public string Speed { get; set; }
         public string MACAddress { get; set; }
         public string NetConnectionID { get; set; }
 
