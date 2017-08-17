@@ -113,7 +113,7 @@ namespace HSRG___Inventory.Controllers
             PropertyInfo[] properties = typeof(HSRG___Inventory.Models.SystemEnclosure).GetProperties();
             ViewBag.properties = properties;
 
-            return PartialView("~/Views/Table/SystemEnclosure.cshtml", db.SystemEnclosure.First(s => s.ComputerID == id)); //Error because of null values; Chassis types should be chassis type
+            return PartialView("~/Views/Table/SystemEnclosure.cshtml", db.SystemEnclosure.First(s => s.ComputerID == id)); //Error because of null values
         }
 
         [ChildActionOnly]

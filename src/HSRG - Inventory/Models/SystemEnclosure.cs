@@ -14,7 +14,7 @@ namespace HSRG___Inventory.Models
         public string ComputerID { get; set; }
         public string Tag { get; set; }
         public string AudibleAlarm { get; set; }
-        public string ChassisType { get; set; }
+        public string ChassisTypes { get; set; }
         public string HeatGeneration { get; set; }
         public string HotSwappable { get; set; }
         public string InstallDate { get; set; }
