@@ -12,31 +12,39 @@
     }
 </style>
 
-<div class="btn">
-    <input type="button" value="Computers" onclick="location.href='@Url.Action("Index", new { TypeFilter = "Computers" } ) '" />
-    <input type="button" value="Servers" onclick="location.href='@Url.Action("Index", new { TypeFilter = "Servers" } ) '" />
-</div>
-
-<div class="table-responsive">
-    <table class="table table-md table-bordered table-condensed table-striped table-hover">
-        <tr>
-            @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
+<div class="container-fluid">
+    <div class="row">
+        <div class="button-wrapper">
+            <a href="@Url.Action("Index", new { TypeFilter = "Computers" } )" class="btn btn-default btn-md" role="button">Clients</a>
+            <a href="@Url.Action("Index", new { TypeFilter = "Servers" } )" class="btn btn-default btn-md" role="button">Servers</a>
+        </div>
+    </div>        
+    
+    <div class="row">
+        <div class="table-responsive">
+            <table class="table table-md table-bordered table-condensed table-striped table-hover">
+                <tr>
+                    @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
             {
-                <th style="text-align: center" >@property.Name</th>
-            }
-        </tr>
+                        <th style="text-align: center">@property.Name</th>
+                    }
+                </tr>
 
-        @foreach (var item in Model)
-        {
-            <tr class="clickable-row" onclick="document.location='@Url.Action("Details", "Home", new { id = item.ComputerID })';">
-               
-                @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
-               {
-                <td>@property.GetValue(item, null)</td>
-               }
-                
-            </tr>
-        }
-    </table>
+                @foreach (var item in Model)
+            {
+                    <tr class="clickable-row" onclick="document.location='@Url.Action("Details", "Home", new { id = item.ComputerID })';">
+
+                        @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
+                        {
+                            <td>@property.GetValue(item, null)</td>
+                        }
+
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>   
 </div>
+
+
 
