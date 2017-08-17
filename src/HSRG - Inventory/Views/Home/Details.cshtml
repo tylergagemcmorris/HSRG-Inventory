@@ -2,6 +2,14 @@
     <a href="@Url.Action("Index")" class="btn btn-default btn-md" role="button">Back to home</a>
 </div>
 
+<script>
+    function topFunction() {
+        document.body.scrollTop = 0; // For Chrome, Safari and Opera 
+        document.documentElement.scrollTop = 0; // For IE and Firefox
+    }
+</script>
+
+
 @{
     ViewBag.Title = "Details";
 }
@@ -29,6 +37,6 @@
 </div>
 
 <div class="button-wrapper" style="text-align:center">
-    <a href="@Url.Action("Index")" class="btn btn-default btn-md" role="button">Back to home</a>
+    <button onclick="topFunction()" id="myBtn" title="Go to top" class="btn btn-default btn-md">Back to top</button>
 </div>
 

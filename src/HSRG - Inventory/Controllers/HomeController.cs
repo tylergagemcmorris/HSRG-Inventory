@@ -15,7 +15,7 @@ namespace HSRG___Inventory.Controllers
     {
         private Context db = new Context("InventoryDetails");
 
-        public ActionResult Index(string TypeFilter, string SortBy)
+        public ActionResult Index(string TypeFilter, string SortBy, string searchitem)
         {
             PropertyInfo[] properties = typeof(HSRG___Inventory.Models.InventoryDetail).GetProperties();
             ViewBag.properties = properties;
@@ -36,9 +36,21 @@ namespace HSRG___Inventory.Controllers
                     break;
             }
 
+            if (!string.IsNullOrEmpty(searchitem))
+            {
+                details = details.Where(x => x.ComputerID.Contains(searchitem));
+            }
+
             return View(details.ToList());
         }
 
+        //[HttpPost]
+        //public ActionResult Index(string searchitem)
+        //{
+        //    details = details.Where(s => s.ComputerID == searchitem);
+
+        //    return View(details.ToList());
+        //}
 
 
         public ActionResult Details(string id)
