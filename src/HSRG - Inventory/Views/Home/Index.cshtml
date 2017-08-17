@@ -15,6 +15,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="button-wrapper">
+            <a href="@Url.Action("Index")" class="btn btn-default btn-md" role="button">All</a>
             <a href="@Url.Action("Index", new { TypeFilter = "Computers" } )" class="btn btn-default btn-md" role="button">Clients</a>
             <a href="@Url.Action("Index", new { TypeFilter = "Servers" } )" class="btn btn-default btn-md" role="button">Servers</a>
         </div>
