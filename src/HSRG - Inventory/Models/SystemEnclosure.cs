@@ -19,9 +19,9 @@ namespace HSRG___Inventory.Models
         public string HotSwappable { get; set; }
         public string InstallDate { get; set; }
         public string LockPresent { get; set; }
-        public decimal PoweredOn { get; set; }
-        public decimal PartNumber { get; set; }
-        public decimal SerialNumber { get; set; }
+        public string PoweredOn { get; set; }
+        public string PartNumber { get; set; }
+        public string SerialNumber { get; set; }
 
     }
 }
