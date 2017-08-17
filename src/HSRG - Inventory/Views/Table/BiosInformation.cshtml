@@ -1,27 +1,30 @@
 ﻿@model HSRG___Inventory.Models.BIOSInformation
 
-<div>
-    <table class="table-bordered table table-md table-condensed table-striped">
-        <tr>
-            @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
+<div class="col-sm-9 col-sm-offset-1 col-md-12 col-md-offset-0 main">
+    <div class="table-responsive">
+        <table class="table-bordered table table-md table-condensed table-striped">
+            <tr>
+                @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
             {
                 if (property.Name != "ComputerID")
                 {
-                    <th>@property.Name</th>
+                        <th>@property.Name</th>
+                    }
                 }
-            }
-        </tr>
+            </tr>
 
-        <tr>
+            <tr>
 
-            @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
+                @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
             {
                 if (property.Name != "ComputerID")
                 {
-                    <td>@property.GetValue(Model, null)</td>
+                        <td>@property.GetValue(Model, null)</td>
+                    }
                 }
-            }
-        </tr>
-    </table>
+            </tr>
+        </table>
+    </div>
+    
 </div>
 
