@@ -219,6 +219,7 @@
     <Content Include="Views\Table\BiosInformation.cshtml" />
     <Content Include="Views\Table\MemoryInformation.cshtml" />
     <Content Include="Views\Table\SystemInformation.cshtml" />
+    <Content Include="Views\Table\HardDiskInformation.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

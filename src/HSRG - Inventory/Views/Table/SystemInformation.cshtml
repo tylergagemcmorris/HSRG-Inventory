@@ -5,7 +5,10 @@
         <tr>
             @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
             {
-                <th>@property.Name</th>
+                if (property.Name != "ComputerID")
+                {
+                    <th>@property.Name</th>
+                }
             }
         </tr>
 
@@ -13,7 +16,10 @@
 
             @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
             {
-                <td>@property.GetValue(Model, null)</td>
+                if (property.Name != "ComputerID")
+                {
+                    <td>@property.GetValue(Model, null)</td>
+                }
             }
         </tr>
     </table>
