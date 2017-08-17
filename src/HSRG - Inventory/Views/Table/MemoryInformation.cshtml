@@ -4,30 +4,32 @@
     int length = 0;
 }
 
-<div class="table-responsive">
-    <table class="table-bordered table table-md table-condensed table-striped">
-        <tr>
-            @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
-    {
-        if (property.Name != "ComputerID")
-        {
-                    <th style="text-align: center">@property.Name</th>
-                    length = property.GetValue(Model, null).ToString().Split(new string[] { Environment.NewLine }, StringSplitOptions.None).Length - 1;
-                }
-            }
-        </tr>
-        @for (int i = 0; i < length; i++)
-    {
-            <tr style="text-align: center">
+<div class="col-sm-9 col-sm-offset-1 col-md-12 col-md-offset-0 main">
+    <div class="table-responsive">
+        <table class="table-bordered table table-md table-condensed table-striped">
+            <tr>
                 @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
-        {
-            if (property.Name != "ComputerID")
-            {
-                var words = property.GetValue(Model, null).ToString().Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
-                        <td>@words[i]</td>
+                {
+                    if (property.Name != "ComputerID")
+                    {
+                        <th style="text-align: center">@property.Name</th>
+                        length = property.GetValue(Model, null).ToString().Split(new string[] { Environment.NewLine }, StringSplitOptions.None).Length - 1;
                     }
                 }
             </tr>
-        }
-    </table>
+            @for (int i = 0; i < length; i++)
+            {
+                <tr>
+                    @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
+                    {
+                        if (property.Name != "ComputerID")
+                        {
+                            var words = property.GetValue(Model, null).ToString().Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
+                            <td style="text-align: center">@words[i]</td>
+                        }
+                    }
+                </tr>
+            }
+        </table>
+    </div>
 </div>

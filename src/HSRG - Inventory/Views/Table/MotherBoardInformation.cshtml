@@ -1,12 +1,12 @@
 ﻿@model HSRG___Inventory.Models.MotherBoardInformation
 
-<div>
+<div class="col-sm-9 col-sm-offset-1 col-md-10 col-md-offset-0 main">
     <table class="table-bordered table table-md table-condensed table-striped">
         <tr>
             @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
-            {
-                if (property.Name != "ComputerID")
-                {
+    {
+        if (property.Name != "ComputerID")
+        {
                     <th style="text-align: center">@property.Name</th>
                 }
             }
@@ -15,12 +15,14 @@
         <tr>
 
             @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
-            {
-                if (property.Name != "ComputerID")
-                {
+    {
+        if (property.Name != "ComputerID")
+        {
                     <td style="text-align: center">@property.GetValue(Model, null)</td>
                 }
             }
         </tr>
     </table>
 </div>
+
+

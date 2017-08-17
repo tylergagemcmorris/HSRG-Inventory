@@ -18,13 +18,13 @@
         </tr>
         @for (int i = 0; i < length; i++)
         {
-            <tr style="text-align: center">
+            <tr>
                 @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
                 {
                     if (property.Name != "ComputerID")
                     {
                     var words = property.GetValue(Model, null).ToString().Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
-                        <td>@words[i]</td>
+                        <td style="text-align: center">@words[i]</td>
                     }
                 }
             </tr>
