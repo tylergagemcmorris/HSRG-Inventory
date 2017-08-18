@@ -166,6 +166,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Context.cs" />
+    <Compile Include="JavaScriptConvert.cs" />
     <Compile Include="Models\BIOSInformation.cs" />
     <Compile Include="Models\DriveSpace.cs" />
     <Compile Include="Models\HardDiskInformation.cs" />
@@ -226,6 +227,7 @@
     <Content Include="Views\Table\DriveSpace.cshtml" />
     <Content Include="Views\Table\NetworkAdapters.cshtml" />
     <Content Include="Views\Table\UpdatesInstalled.cshtml" />
+    <Content Include="Views\Performance\Test.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

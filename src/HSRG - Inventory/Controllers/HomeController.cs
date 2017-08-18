@@ -8,6 +8,7 @@ using System.Net;
 using System.Web.Mvc;
 using HSRG___Inventory.Models;
 using System.Reflection;
+using Newtonsoft.Json;
 
 namespace HSRG___Inventory.Controllers
 {
@@ -166,6 +167,12 @@ namespace HSRG___Inventory.Controllers
             var details = db.UpdatesInstalled.Where(s => s.ComputerID == id);
 
             return PartialView("~/Views/Table/UpdatesInstalled.cshtml", details);
+        }
+
+        public ActionResult Test()
+        {
+            ViewBag.Datapoints = JsonConvert.SerializeObject(db.UpdatesInstalled.ToList());
+            return View("~/Views/Performance/Test.cshtml");
         }
     }
 }
