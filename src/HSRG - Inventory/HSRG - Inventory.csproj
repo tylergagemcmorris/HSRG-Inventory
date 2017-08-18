@@ -175,6 +175,7 @@
     <Compile Include="Models\NetworkAdapters.cs" />
     <Compile Include="Models\SystemEnclosure.cs" />
     <Compile Include="Models\SystemInformation.cs" />
+    <Compile Include="Models\UpdatesInstalled.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -224,6 +225,7 @@
     <Content Include="Views\Table\SystemEnclosure.cshtml" />
     <Content Include="Views\Table\DriveSpace.cshtml" />
     <Content Include="Views\Table\NetworkAdapters.cshtml" />
+    <Content Include="Views\Table\UpdatesInstalled.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

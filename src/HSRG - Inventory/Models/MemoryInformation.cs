@@ -12,6 +12,7 @@ namespace HSRG___Inventory.Models
     {
         [Key]
         public string ComputerID { get; set; }
+        [Key]
         public string BankLabel { get; set; }
         public string DeviceLocator { get; set; }
         public string Capacity { get; set; }

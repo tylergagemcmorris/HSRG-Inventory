@@ -1,10 +1,10 @@
-﻿@model IEnumerable<HSRG___Inventory.Models.DriveSpace>
+﻿@model IEnumerable<HSRG___Inventory.Models.UpdatesInstalled>
 
-@{ 
-    
+@{
+    ViewBag.Title = "Recently Installed Updates";
 }
 
-<div class="col-sm-9 col-sm-offset-1 col-md-7 col-md-offset-0 main">
+<div class="col-sm-9 col-sm-offset-1 col-md-8 col-md-offset-0 main">
     <h3 style="text-align: left">@ViewBag.Title</h3>
     <div class="table-responsive">
         <table class="table-bordered table table-md table-condensed table-striped">
@@ -32,6 +32,7 @@
 
                 </tr>
             }
+
         </table>
     </div>
 </div>

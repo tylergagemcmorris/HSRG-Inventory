@@ -7,20 +7,16 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HSRG___Inventory.Models
 {
-    [Table("NetworkAdapters")]
-    public class NetworkAdapters
+    [Table("UpdatesInstalled")]
+    public class UpdatesInstalled
     {
         [Key]
         public string ComputerID { get; set; }
         [Key]
-        public string Name { get; set; }
-        public string Manufacturer { get; set; }
+        public string HotFixID { get; set; }
         public string Description { get; set; }
-        public string AdapterType { get; set; }
-        public string Speed { get; set; }
-        public string MACAddress { get; set; }
-        public string NetConnectionID { get; set; }
-
+        public string InstalledBy { get; set; }
+        public string InstalledOn { get; set; }
 
     }
 }

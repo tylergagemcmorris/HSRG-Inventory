@@ -28,7 +28,7 @@
     <div class="row">
         <div class="button-wrapper">
             <a href="@Url.Action("Index")" class="btn btn-default btn-md" role="button">All</a>
-            <a href="@Url.Action("Index", new { TypeFilter = "Computers" } )" class="btn btn-default btn-md" role="button">Clients</a>
+            <a href="@Url.Action("Index", new { TypeFilter = "Clients" } )" class="btn btn-default btn-md" role="button">Clients</a>
             <a href="@Url.Action("Index", new { TypeFilter = "Servers" } )" class="btn btn-default btn-md" role="button">Servers</a>
         </div>
     </div>        
@@ -38,13 +38,13 @@
             <table class="table table-md table-bordered table-condensed table-striped table-hover">
                 <tr>
                     @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
-            {
+                    {
                         <th style="text-align: center">@property.Name</th>
                     }
                 </tr>
 
                 @foreach (var item in Model)
-            {
+                {
                     <tr class="clickable-row" onclick="document.location='@Url.Action("Details", "Home", new { id = item.ComputerID })';">
 
                         @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)

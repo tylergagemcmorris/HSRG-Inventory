@@ -26,11 +26,11 @@ namespace HSRG___Inventory.Controllers
                           select s;
             switch (TypeFilter)
             {
-                case "Computers":
-                    details = details.Where(s => s.ComputerID == "HSRG-100H2");
+                case "Clients":
+                    details = details.Where(s => s.Type == "Client");
                     break;
                 case "Servers":
-                    details = details.Where(s => s.ComputerID == "HSRG-100H3");
+                    details = details.Where(s => s.Type == "Server");
                     break;
                 default:
                     break;
@@ -91,7 +91,7 @@ namespace HSRG___Inventory.Controllers
             ViewBag.properties = properties;
             ViewBag.Title = "Memory Information";
 
-            return PartialView("~/Views/Table/MemoryInformation.cshtml", db.MemoryInformation.First(s => s.ComputerID == id));
+            return PartialView("~/Views/Table/MemoryInformation.cshtml", db.MemoryInformation.Where(s => s.ComputerID == id));
         }
 
         [ChildActionOnly]
@@ -141,7 +141,7 @@ namespace HSRG___Inventory.Controllers
             ViewBag.properties = properties;
             ViewBag.Title = "Drive Space";
 
-            return PartialView("~/Views/Table/DriveSpace.cshtml", db.DriveSpace.First(s => s.ComputerID == id)); //Error: Input string not in correct format
+            return PartialView("~/Views/Table/DriveSpace.cshtml", db.DriveSpace.Where(s => s.ComputerID == id)); //Error: Input string not in correct format
         }
 
         [ChildActionOnly]
@@ -151,7 +151,21 @@ namespace HSRG___Inventory.Controllers
             ViewBag.properties = properties;
             ViewBag.Title = "Network Adapters";
 
-            return PartialView("~/Views/Table/NetworkAdapters.cshtml", db.NetworkAdapters.First(s => s.ComputerID == id));
+            var details = db.NetworkAdapters.Where(s => s.ComputerID == id);
+
+            return PartialView("~/Views/Table/NetworkAdapters.cshtml", details);
+        }
+
+        [ChildActionOnly]
+        public ActionResult PartialUpdates(string id)
+        {
+            PropertyInfo[] properties = typeof(HSRG___Inventory.Models.UpdatesInstalled).GetProperties();
+            ViewBag.properties = properties;
+            ViewBag.Title = "Installed Updates";
+
+            var details = db.UpdatesInstalled.Where(s => s.ComputerID == id);
+
+            return PartialView("~/Views/Table/UpdatesInstalled.cshtml", details);
         }
     }
 }

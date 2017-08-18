@@ -19,6 +19,11 @@ namespace HSRG___Inventory
         {
             var sqliteConnectionInitializer = new SqliteCreateDatabaseIfNotExists<Context>(modelBuilder);
             Database.SetInitializer(sqliteConnectionInitializer);
+
+            modelBuilder.Entity<DriveSpace>().HasKey(t => new { t.ComputerID, t.DriveLetter });
+            modelBuilder.Entity<MemoryInformation>().HasKey(t => new { t.ComputerID, t.BankLabel });
+            modelBuilder.Entity<NetworkAdapters>().HasKey(t => new { t.ComputerID, t.Name });
+            modelBuilder.Entity<UpdatesInstalled>().HasKey(t => new { t.ComputerID, t.HotFixID });
         }
 
         public virtual DbSet<InventoryDetail> InventoryDetails { get; set; }
@@ -30,6 +35,7 @@ namespace HSRG___Inventory
         public virtual DbSet<NetworkAdapters> NetworkAdapters { get; set; }
         public virtual DbSet<SystemEnclosure> SystemEnclosure { get; set; }
         public virtual DbSet<SystemInformation> SystemInformation { get; set; }
+        public virtual DbSet<UpdatesInstalled> UpdatesInstalled { get; set; }
 
     }
 

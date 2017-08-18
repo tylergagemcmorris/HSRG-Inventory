@@ -19,17 +19,17 @@ $url = $null
     foreach ($Computer in $ComputerName){
          
         ## Invokes gathering Hardware Information ##
-        $obj = Get-WmiObject win32_networkadapter -ComputerName $Computer  | Select @{Label='ComputerID';Expression={$_.PSComputerName}}, Name,Manufacturer,Description,AdapterType,Speed,MACAddress,NetConnectionID 
-
+        $Obj = Get-HotFix -ComputerName $Computer | Select-Object @{Label='ComputerID';Expression={$_.PSComputerName}}, HotFixID,Description,InstalledBy,InstalledOn | Sort-Object InstalledOn -Descending
+        
         $Objs += $Obj
-    }            
-
+    }
+                 
 ## Uncomment out if you want to make a new table ##
-$Query = "CREATE TABLE NetworkAdapters (ComputerID TEXT, Name TEXT, Manufacturer TEXT, Description TEXT, AdapterType TEXT, Speed TEXT, MACAddress TEXT, NetConnectionID TEXT, PRIMARY KEY(ComputerID, Name))"
+$Query = "CREATE TABLE UpdatesInstalled (ComputerID TEXT, HotFixID TEXT, Description TEXT, InstalledBy TEXT, InstalledOn TEXT, PRIMARY KEY (ComputerID, HotFixID))"
 Invoke-SqliteQuery -DataSource $DataSource -Query $Query 
 
 
 ## Takes items pulled from object created and outputs them to datatable ##
 $dtable = $Objs | Out-DataTable
 
-Invoke-SQLiteBulkCopy -DataTable $dtable -DataSource $DataSource -Table NetworkAdapters
+Invoke-SQLiteBulkCopy -DataTable $dtable -DataSource $DataSource -Table UpdatesInstalled

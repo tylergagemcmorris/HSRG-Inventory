@@ -19,7 +19,7 @@ namespace HSRG___Inventory.Models
             public string PrimaryBIOS { get; set; }
             public string ReleaseDate { get; set; }
             public string SMBIOSBIOSVersion { get; set; }
-            public int SMBIOSMajorVersion { get; set; }
-            public int SMBIOSMinorVersion { get; set; }
+            public string SMBIOSMajorVersion { get; set; }
+            public string SMBIOSMinorVersion { get; set; }
     }
 }

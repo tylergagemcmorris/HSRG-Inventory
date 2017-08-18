@@ -12,6 +12,7 @@ namespace HSRG___Inventory.Models
     {
         [Key]
         public string ComputerID { get; set; }
+        [Key]
         [Column("Drive Letter")]
         public string DriveLetter { get; set; }
         public string Label { get; set; }

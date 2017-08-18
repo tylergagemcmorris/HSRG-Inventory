@@ -5,9 +5,9 @@
     <table class="table-bordered table table-md table-condensed table-striped">
         <tr>
             @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
-    {
-        if (property.Name != "ComputerID")
-        {
+            {
+                if (property.Name != "ComputerID")
+                {
                     <th style="text-align: center">@property.Name</th>
                 }
             }
@@ -16,9 +16,9 @@
         <tr>
 
             @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
-    {
-        if (property.Name != "ComputerID")
-        {
+            {
+                if (property.Name != "ComputerID")
+                {
                     <td style="text-align: center">@property.GetValue(Model, null)</td>
                 }
             }

@@ -1,7 +1,7 @@
-﻿@model HSRG___Inventory.Models.MemoryInformation
+﻿@model IEnumerable<HSRG___Inventory.Models.MemoryInformation>
 
 @{ 
-    int length = 0;
+    
 }
 
 <div class="col-sm-9 col-sm-offset-1 col-md-8 col-md-offset-0 main">
@@ -14,21 +14,22 @@
                     if (property.Name != "ComputerID")
                     {
                         <th style="text-align: center">@property.Name</th>
-                        length = property.GetValue(Model, null).ToString().Split(new string[] { Environment.NewLine }, StringSplitOptions.None).Length - 1;
                     }
                 }
             </tr>
-            @for (int i = 0; i < length; i++)
+
+            @foreach (var item in Model)
             {
                 <tr>
+
                     @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
                     {
                         if (property.Name != "ComputerID")
                         {
-                            var words = property.GetValue(Model, null).ToString().Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
-                            <td style="text-align: center">@words[i]</td>
+                            <td style="text-align: center">@property.GetValue(item, null)</td>
                         }
                     }
+
                 </tr>
             }
         </table>
