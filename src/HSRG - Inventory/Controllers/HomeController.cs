@@ -171,7 +171,7 @@ namespace HSRG___Inventory.Controllers
 
         public ActionResult Test()
         {
-            ViewBag.Datapoints = JsonConvert.SerializeObject(db.UpdatesInstalled.ToList());
+            ViewBag.Datapoints = JavaScriptConvert.SerializeObject(db.CPUPerformance.ToList());
             return View("~/Views/Performance/Test.cshtml");
         }
     }
