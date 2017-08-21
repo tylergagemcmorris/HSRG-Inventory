@@ -1,4 +1,4 @@
-﻿@model IEnumerable<HSRG___Inventory.Models.UpdatesInstalled>
+﻿@model string
 
 
 @{
@@ -22,14 +22,16 @@
     <script>
         var ctx = document.getElementById('myChart').getContext('2d');
 
-        var json = @ViewBag.Datapoints;
+        
+
+        var json = @Html.Raw(Model);
         var chartjsData = [];
         for (var i = 0; i < json.length; i++) {
-            chartjsData.push(json[i].cpuUsage);
+            chartjsData.push(json[i].CPUUsage);
         }
         var chartjsLabels = [];
         for (var i = 0; i < json.length; i++) {
-            chartjsLabels.push(json[i].time);
+            chartjsLabels.push(json[i].Time);
         }
 
         console.log(chartjsLabels);
