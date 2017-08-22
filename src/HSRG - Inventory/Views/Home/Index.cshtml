@@ -49,7 +49,7 @@
 
                         @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
                         {
-                            <td>@property.GetValue(item, null)</td>
+                            <td style="white-space: pre">@property.GetValue(item, null)</td>
                         }
 
                     </tr>
@@ -58,6 +58,5 @@
         </div>
     </div>   
 </div>
-
 
 
