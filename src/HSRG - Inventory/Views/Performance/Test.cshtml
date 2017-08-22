@@ -24,7 +24,7 @@
 
         
 
-        var json = @Html.Raw(Model);
+        var json = @Html.Raw(Model));
         var chartjsData = [];
         for (var i = 0; i < json.length; i++) {
             chartjsData.push(json[i].CPUUsage);

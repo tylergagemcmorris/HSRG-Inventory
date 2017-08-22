@@ -30,21 +30,28 @@ namespace HSRG___Inventory.Controllers
 
             RunspaceInvoke scriptInvoker = new RunspaceInvoke(runspace);
 
-            Pipeline pipeline = runspace.CreatePipeline();
+            
+
+            using (Pipeline pipeline = runspace.CreatePipeline())
+            {
+                Command myCommand = new Command(path);
+                myCommand.Parameters.Add("SampleInterval", 1);
+                myCommand.Parameters.Add("MaxSamples", 10);
+                myCommand.Parameters.Add("DataSource", "abc");
+
+                pipeline.Commands.Add(myCommand);
+                pipeline.InvokeAsync(); // InvokeAsync calls it as a background process so it won't make the web page timeout.
+                ViewBag.Datapoints = pipeline.Output;
+
+            }
 
             //Here's how you add a new script with arguments
-            Command myCommand = new Command(path);
-            myCommand.Parameters.Add("SampleInterval", 1);
-            myCommand.Parameters.Add("MaxSamples", 10);
-            myCommand.Parameters.Add("DataSource", "abc");
-
-            pipeline.Commands.Add(myCommand);
+            
 
             // Execute PowerShell script
-            var results = pipeline.Invoke();
-            var Datapoints = results[0].BaseObject;
 
-            return View("~/Views/Performance/Test.cshtml", Datapoints);
+
+            return View("~/Views/Performance/Test.cshtml");
         }
     }
 }
