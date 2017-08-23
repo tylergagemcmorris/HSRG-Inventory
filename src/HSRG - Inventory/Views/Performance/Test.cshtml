@@ -25,7 +25,7 @@
     <script>
 
         $('#btnAjax').click(function () {
-            $.getJSON("http://localhost:60769/UpdateDB/DoWork", function (data) {
+            $.getJSON("@Url.Action("DoWork")", function (data) {
                 console.log(data);
                 var json = data;
 

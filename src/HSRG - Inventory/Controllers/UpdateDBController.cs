@@ -31,6 +31,7 @@ namespace HSRG___Inventory.Controllers
             string scriptpath = Server.MapPath("~/App_Data/test.ps1");
             //string DataSourcePath = Server.MapPath("~/App_Data/InventoryDetails.sqlite3");
 
+            
             AsyncManager.OutstandingOperations.Increment();
             RunspaceConfiguration runspaceConfiguration = RunspaceConfiguration.Create();
             Runspace runspace = RunspaceFactory.CreateRunspace(runspaceConfiguration);
@@ -48,15 +49,67 @@ namespace HSRG___Inventory.Controllers
 
             pipeline.Output.DataReady += (sender, e) =>
             {
+                Thread.Sleep(1);
                 string test = pipeline.Output.Read().ToString();
                 AsyncManager.Parameters["Datapoints"] = test;
                 
-                AsyncManager.OutstandingOperations.Decrement();
+                AsyncManager.Finish();
             };
 
             pipeline.InvokeAsync();
             pipeline.Input.Close();
             
+            
+        }
+
+        public void RunInventoryDetailsAsync()
+        {
+            string scriptpath = Server.MapPath("~/App_Data/InventoryDetail.ps1");
+            string DataSourcePath = Server.MapPath("~/App_Data/InventoryDetails.sqlite3");
+            string InventoryList = Server.MapPath("~/App_Data/Max's Computer.txt");
+
+            AsyncManager.OutstandingOperations.Increment();
+            RunspaceConfiguration runspaceConfiguration = RunspaceConfiguration.Create();
+            Runspace runspace = RunspaceFactory.CreateRunspace(runspaceConfiguration);
+
+            runspace.Open();
+            RunspaceInvoke scriptInvoker = new RunspaceInvoke(runspace);
+            var pipeline = runspace.CreatePipeline();
+
+            Command myCommand = new Command(scriptpath);
+            myCommand.Parameters.Add("DataSource", DataSourcePath);
+            myCommand.Parameters.Add("FilePath", InventoryList);
+            pipeline.Commands.Add(myCommand);
+
+            pipeline.Error.DataReady += (sender, e) =>
+            {
+                Thread.Sleep(1);
+                string test = pipeline.Error.Read().ToString();
+                AsyncManager.Finish();
+            };
+
+            pipeline.Output.DataReady += (sender, e) =>
+            {
+                Thread.Sleep(1);
+                string test = pipeline.Output.Read().ToString();
+                AsyncManager.Parameters["Datapoints"] = test;
+
+                AsyncManager.Finish();
+            };
+
+            pipeline.InvokeAsync();
+            pipeline.Input.Close();
+        }
+
+        public ActionResult RunInventoryDetailsCompleted(string Datapoints)
+        {
+            return RedirectToAction("Index", "Home");
+
+        }
+
+        public ActionResult Test()
+        {
+            return View("~/Views/Performance/Test.cshtml");
         }
     }
 }
