@@ -50,6 +50,7 @@
 
                         @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
                         {
+                            //When you want to remove the table, just copy what's inside the else, delete the if-else block, then paste.
                             if (property.Name == "DriveSpace")
                             {
                                 <td style="vertical-align: middle">
