@@ -16,6 +16,12 @@ namespace HSRG___Inventory.Controllers
     {
         private Context db = new Context("InventoryDetails");
 
+        public ActionResult FlushInventory(string table)
+        {
+            db.Database.ExecuteSqlCommand("DELETE FROM [" + table + "]");
+            return Content(table + " flushed");
+        }
+
         public ActionResult Index(string TypeFilter, string SortBy, string searchitem)
         {
             PropertyInfo[] properties = typeof(HSRG___Inventory.Models.InventoryDetail).GetProperties();

@@ -19,9 +19,11 @@ namespace HSRG___Inventory.Controllers
     public class UpdateDBController : AsyncController
     {
         // GET: UpdateDB
+        public static string data { get; private set; }
 
         public ActionResult DoWorkCompleted(string Datapoints)
         {
+            data += Datapoints;
             return Content(Datapoints);
 
         }
@@ -62,9 +64,10 @@ namespace HSRG___Inventory.Controllers
             
         }
 
-        public void RunInventoryDetailsAsync()
+        public void UpdateTablesAsync(string table)
         {
-            string scriptpath = Server.MapPath("~/App_Data/InventoryDetail.ps1");
+            
+            string scriptpath = Server.MapPath("~/App_Data/DatabaseScripts/" + table + ".ps1");
             string DataSourcePath = Server.MapPath("~/App_Data/InventoryDetails.sqlite3");
             string InventoryList = Server.MapPath("~/App_Data/Max's Computer.txt");
 
@@ -81,18 +84,13 @@ namespace HSRG___Inventory.Controllers
             myCommand.Parameters.Add("FilePath", InventoryList);
             pipeline.Commands.Add(myCommand);
 
-            pipeline.Error.DataReady += (sender, e) =>
-            {
-                Thread.Sleep(1);
-                string test = pipeline.Error.Read().ToString();
-                AsyncManager.Finish();
-            };
-
             pipeline.Output.DataReady += (sender, e) =>
             {
                 Thread.Sleep(1);
                 string test = pipeline.Output.Read().ToString();
-                AsyncManager.Parameters["Datapoints"] = test;
+                AsyncManager.Parameters["Output"] = test;
+                AsyncManager.Parameters["Table"] = table;
+                AsyncManager.Parameters["Time"] = DateTime.Now.ToString();
 
                 AsyncManager.Finish();
             };
@@ -101,15 +99,20 @@ namespace HSRG___Inventory.Controllers
             pipeline.Input.Close();
         }
 
-        public ActionResult RunInventoryDetailsCompleted(string Datapoints)
+        public ActionResult UpdateTablesCompleted(string Output, string Table, string Time)
         {
-            return RedirectToAction("Index", "Home");
 
+            return Content("Table: " + Table + "was updated on " + Time + " with output: " + Output);
         }
 
         public ActionResult Test()
         {
             return View("~/Views/Performance/Test.cshtml");
+        }
+
+        public String example()
+        {
+            return data;
         }
     }
 }
