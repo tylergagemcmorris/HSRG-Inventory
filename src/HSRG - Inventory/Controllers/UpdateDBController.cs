@@ -6,6 +6,8 @@ using System.Data.Entity;
 using System.Web;
 using System.Net;
 using System.Web.Mvc;
+using System.Threading;
+using System.Threading.Tasks;
 using HSRG___Inventory.Models;
 using System.Reflection;
 using Newtonsoft.Json;
@@ -14,44 +16,47 @@ using System.Management.Automation.Runspaces;
 
 namespace HSRG___Inventory.Controllers
 {
-    public class UpdateDBController : Controller
+    public class UpdateDBController : AsyncController
     {
         // GET: UpdateDB
-        public ActionResult Index()
+
+        public ActionResult DoWorkCompleted(string Datapoints)
         {
-            // Add the script to the PowerShell object
-            string path = Server.MapPath("~/App_Data/test.ps1");
+            return Content(Datapoints);
+
+        }
+
+        public void DoWorkAsync()
+        {
+            string scriptpath = Server.MapPath("~/App_Data/test.ps1");
             //string DataSourcePath = Server.MapPath("~/App_Data/InventoryDetails.sqlite3");
 
+            AsyncManager.OutstandingOperations.Increment();
             RunspaceConfiguration runspaceConfiguration = RunspaceConfiguration.Create();
-
             Runspace runspace = RunspaceFactory.CreateRunspace(runspaceConfiguration);
+            
             runspace.Open();
-
             RunspaceInvoke scriptInvoker = new RunspaceInvoke(runspace);
+            var pipeline = runspace.CreatePipeline();
+                
+            Command myCommand = new Command(scriptpath);
+            myCommand.Parameters.Add("SampleInterval", 1);
+            myCommand.Parameters.Add("MaxSamples", 10);
+            myCommand.Parameters.Add("DataSource", "abc");
 
-            
+            pipeline.Commands.Add(myCommand);
 
-            using (Pipeline pipeline = runspace.CreatePipeline())
+            pipeline.Output.DataReady += (sender, e) =>
             {
-                Command myCommand = new Command(path);
-                myCommand.Parameters.Add("SampleInterval", 1);
-                myCommand.Parameters.Add("MaxSamples", 10);
-                myCommand.Parameters.Add("DataSource", "abc");
+                string test = pipeline.Output.Read().ToString();
+                AsyncManager.Parameters["Datapoints"] = test;
+                
+                AsyncManager.OutstandingOperations.Decrement();
+            };
 
-                pipeline.Commands.Add(myCommand);
-                pipeline.InvokeAsync(); // InvokeAsync calls it as a background process so it won't make the web page timeout.
-                ViewBag.Datapoints = pipeline.Output;
-
-            }
-
-            //Here's how you add a new script with arguments
+            pipeline.InvokeAsync();
+            pipeline.Input.Close();
             
-
-            // Execute PowerShell script
-
-
-            return View("~/Views/Performance/Test.cshtml");
         }
     }
 }
