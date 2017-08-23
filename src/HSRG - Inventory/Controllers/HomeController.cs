@@ -39,7 +39,7 @@ namespace HSRG___Inventory.Controllers
 
             if (!string.IsNullOrEmpty(searchitem))
             {
-                details = details.Where(x => x.ComputerID.Contains(searchitem));
+                details = details.Where(x => x.ComputerID.ToUpper().Contains(searchitem.ToUpper()));
             }
 
             return View(details.ToList());

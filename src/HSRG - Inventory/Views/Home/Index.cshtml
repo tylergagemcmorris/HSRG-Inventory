@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<HSRG___Inventory.Models.InventoryDetail>
+@using System.Text.RegularExpressions;
 
 @{
     ViewBag.Title = "Home Page";
@@ -49,7 +50,53 @@
 
                         @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
                         {
-                            <td>@property.GetValue(item, null)</td>
+                            //When you want to remove the table, just copy what's inside the else, delete the if-else block, then paste.
+                            if (property.Name == "DriveSpace")
+                            {
+                                <td style="vertical-align: middle">
+                                    <table class="table-md table-bordered table-condensed table-striped table-hover">
+                                        <tr>
+                                            <th style="text-align: center">Drive</th>
+                                            <th style="text-align: center">Free</th>
+                                            <th style="text-align: center">Total</th>
+                                        </tr>
+                                        @if (true)
+                                        {
+                                            string drivespace = property.GetValue(item, null).ToString();
+                                            int drivenum = Regex.Matches(Regex.Escape(drivespace), ":").Count;
+                                            int index1 = 0;
+                                            int index2;
+                                            int index3;
+                                            string temp;
+                                            for (int i = 0; i < drivenum; i++)
+                                            {
+                                                <tr>
+                                                    @if (true)
+                                                    {
+                                                        index2 = drivespace.IndexOf(":", index1 + 2) - 1;
+                                                        index1 = index2;
+                                                        index3 = drivespace.IndexOf(" ", index2);
+                                                        temp = drivespace.Substring(index1, index3 - index2);
+                                                        <td style="vertical-align: middle">@temp</td>
+                                                        index2 = index3;
+                                                        index3 = drivespace.IndexOf(" ", index3 + 4);
+                                                        temp = drivespace.Substring(index2 + 4, index3 - index2 - 4);
+                                                        <td style="vertical-align: middle">@temp</td>
+                                                        index2 = index3;
+                                                        index3 = drivespace.IndexOf("\r\n", index3 + 1);
+                                                        temp = drivespace.Substring(index2, index3 - index2);
+                                                        <td style="vertical-align: middle">@temp</td>
+                                                    }
+                                                </tr>
+                                            }
+                                        }
+                                    </table>
+                                </td>
+                            }
+                            else
+                            {
+                                <td style="white-space: pre; vertical-align: middle">@property.GetValue(item, null)</td>
+                            }
                         }
 
                     </tr>
@@ -58,6 +105,5 @@
         </div>
     </div>   
 </div>
-
 
 
