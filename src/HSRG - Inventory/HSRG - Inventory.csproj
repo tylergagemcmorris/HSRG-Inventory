@@ -192,6 +192,7 @@
     <Compile Include="Models\BIOSInformation.cs" />
     <Compile Include="Models\CPUPerformance.cs" />
     <Compile Include="Models\DriveSpace.cs" />
+    <Compile Include="Models\DriveTable.cs" />
     <Compile Include="Models\HardDiskInformation.cs" />
     <Compile Include="Models\InventoryDetail.cs" />
     <Compile Include="Models\MemoryInformation.cs" />

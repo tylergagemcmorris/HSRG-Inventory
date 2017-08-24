@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<HSRG___Inventory.Models.InventoryDetail>
 @using System.Text.RegularExpressions;
+@using Newtonsoft.Json;
+@using HSRG___Inventory.Models;
 
 @{
     ViewBag.Title = "Home Page";
@@ -53,49 +55,30 @@
                             //When you want to remove the table, just copy what's inside the else, delete the if-else block, then paste.
                             if (property.Name == "DriveSpace")
                             {
-                                <td style="vertical-align: middle">
-                                    <table class="table-md table-bordered table-condensed table-striped table-hover">
+                                string test = property.GetValue(item, null).ToString();
+                                List<DriveTable> dt = JsonConvert.DeserializeObject<List<DriveTable>>((@property.GetValue(item, null).ToString()));
+                                <td style="text-align: center">
+                                    <table class="table-bordered table table-condensed table-striped">
                                         <tr>
                                             <th style="text-align: center">Drive</th>
                                             <th style="text-align: center">Free</th>
                                             <th style="text-align: center">Total</th>
                                         </tr>
-                                        @if (true)
+
+                                        @foreach (var drive in dt)
                                         {
-                                            string drivespace = property.GetValue(item, null).ToString();
-                                            int drivenum = Regex.Matches(Regex.Escape(drivespace), ":").Count;
-                                            int index1 = 0;
-                                            int index2;
-                                            int index3;
-                                            string temp;
-                                            for (int i = 0; i < drivenum; i++)
-                                            {
-                                                <tr>
-                                                    @if (true)
-                                                    {
-                                                        index2 = drivespace.IndexOf(":", index1 + 2) - 1;
-                                                        index1 = index2;
-                                                        index3 = drivespace.IndexOf(" ", index2);
-                                                        temp = drivespace.Substring(index1, index3 - index2);
-                                                        <td style="vertical-align: middle">@temp</td>
-                                                        index2 = index3;
-                                                        index3 = drivespace.IndexOf(" ", index3 + 4);
-                                                        temp = drivespace.Substring(index2 + 4, index3 - index2 - 4);
-                                                        <td style="vertical-align: middle">@temp</td>
-                                                        index2 = index3;
-                                                        index3 = drivespace.IndexOf("\r\n", index3 + 1);
-                                                        temp = drivespace.Substring(index2, index3 - index2);
-                                                        <td style="vertical-align: middle">@temp</td>
-                                                    }
-                                                </tr>
-                                            }
+                                            <tr>
+                                                <td style="text-align: center">@drive.Drive</td>
+                                                <td style="text-align: center">@drive.Free</td>
+                                                <td style="text-align: center">@drive.Total</td>
+                                            </tr>
                                         }
                                     </table>
                                 </td>
                             }
                             else
                             {
-                                <td style="white-space: pre; vertical-align: middle">@property.GetValue(item, null)</td>
+                                <td style="text-align: center">@property.GetValue(item, null)</td>
                             }
                         }
 
@@ -107,3 +90,60 @@
 </div>
 
 
+<script>
+
+
+    var myArray = [];
+
+    @foreach (var item in Model)
+    {
+        foreach (var prop in ViewBag.properties)
+        {
+            if(prop.Name == "DriveSpace")
+            {
+                @:myArray.push(JSON.stringify(@Html.Raw(prop.GetValue(item,null))));
+            }
+
+        }
+    }
+
+    console.log(myArray[0])
+
+    function buildHtmlTable(list, selector) {
+        var myList = list;
+        var columns = addAllColumnHeaders(myList, selector);
+
+        for (var i = 0; i < myList.length; i++) {
+            var row$ = $('<tr/>');
+            for (var colIndex = 0; colIndex < columns.length; colIndex++) {
+                var cellValue = myList[i][columns[colIndex]];
+                if (cellValue == null) cellValue = "";
+                row$.append($('<td/>').html(cellValue));
+            }
+            $(selector).append(row$);
+        }
+    }
+
+    // Adds a header row to the table and returns the set of columns.
+    // Need to do union of keys from all records as some records may not contain
+    // all records.
+    function addAllColumnHeaders(myList, selector) {
+        var columnSet = [];
+        var headerTr$ = $('<tr/>');
+
+        for (var i = 0; i < myList.length; i++) {
+            var rowHash = myList[i];
+            for (var key in rowHash) {
+                if ($.inArray(key, columnSet) == -1) {
+                    columnSet.push(key);
+                    headerTr$.append($('<th/>').html(key));
+                }
+            }
+        }
+        $(selector).append(headerTr$);
+
+        return columnSet;
+    }
+
+
+</script>
