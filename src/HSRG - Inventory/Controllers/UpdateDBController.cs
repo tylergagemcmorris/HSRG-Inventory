@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using HSRG___Inventory.Models;
 using System.Reflection;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Management.Automation;
 using System.Management.Automation.Runspaces;
 
@@ -20,6 +21,7 @@ namespace HSRG___Inventory.Controllers
     {
         // GET: UpdateDB
         public static string data { get; private set; }
+        private Context db = new Context("InventoryDetails");
 
         public ActionResult DoWorkCompleted(string Datapoints)
         {
@@ -64,6 +66,19 @@ namespace HSRG___Inventory.Controllers
             
         }
 
+        [HttpPost]
+        public void UpdateTime (string result)
+        {
+            JToken token = JObject.Parse(result);
+            var timetoupdate = db.TableTimestamps.First();
+            string test = (string)token.SelectToken("Table");
+            string timeValue = (string)token.SelectToken("Time");
+            PropertyInfo propertyinfo = timetoupdate.GetType().GetProperty(test);
+            propertyinfo.SetValue(timetoupdate, Convert.ChangeType(timeValue, propertyinfo.PropertyType), null);
+            db.SaveChanges();
+        }
+
+        
         public void UpdateTablesAsync(string table)
         {
             
@@ -88,7 +103,14 @@ namespace HSRG___Inventory.Controllers
             {
                 Thread.Sleep(1);
                 string test = pipeline.Output.Read().ToString();
-                AsyncManager.Parameters["Output"] = test;
+                if(pipeline.PipelineStateInfo.State.ToString() == "Completed")
+                {
+                    AsyncManager.Parameters["Output"] = "Completed";
+                }
+                else
+                {
+                    AsyncManager.Parameters["Output"] = pipeline.PipelineStateInfo.Reason.ToString();
+                }
                 AsyncManager.Parameters["Table"] = table;
                 AsyncManager.Parameters["Time"] = DateTime.Now.ToString();
 
@@ -99,10 +121,18 @@ namespace HSRG___Inventory.Controllers
             pipeline.Input.Close();
         }
 
+        
         public ActionResult UpdateTablesCompleted(string Output, string Table, string Time)
         {
+            var TotalResult = new OutputFromUpdateTables { Table = Table, Time = Time, Result = Output };
+            string Results = JsonConvert.SerializeObject(TotalResult);
+            return Content(Results);
+        }
 
-            return Content("Table: " + Table + "was updated on " + Time + " with output: " + Output);
+        public ActionResult UpdateTimeCompleted()
+        {
+
+            return Content("Done");
         }
 
         public ActionResult Test()

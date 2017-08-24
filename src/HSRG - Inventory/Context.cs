@@ -37,6 +37,7 @@ namespace HSRG___Inventory
         public virtual DbSet<SystemInformation> SystemInformation { get; set; }
         public virtual DbSet<UpdatesInstalled> UpdatesInstalled { get; set; }
         public virtual DbSet<CPUPerformance> CPUPerformance { get; set; }
+        public virtual DbSet<TableTimestamps> TableTimestamps { get; set; }
 
     }
 

@@ -6,40 +6,14 @@
     <title>HSRG Inventory</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
 
     <link href="~/Content/simple-sidebar.css" rel="stylesheet">
 </head>
 <body>
     <div id="wrapper">
-        <div id="sidebar-wrapper" style="background : #fff">
-            <ul class="sidebar-nav">
-                <li class="sidebar-brand">
-                    Table list
-                </li>
-                <li>
-                    <a href="#" onclick="return InventoryDetailFunction()">Get Inventory Detail</a>
-                </li>
-                <li>
-                    <a href="#" onclick="return InventoryFlushFunction()">Flush Inventory Detail</a>
-                </li>
-                <li>
-                    <a href="#">Overview</a>
-                </li>
-                <li>
-                    <a href="#">Events</a>
-                </li>
-                <li>
-                    <a href="#">About</a>
-                </li>
-                <li>
-                    <a href="#">Services</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
-                </li>
-            </ul>
-        </div>
-
+        @Html.Action("Sidebar","Home")
         <div id="page-content-wrapper">
             <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
             <div style="text-align: center">
@@ -58,8 +32,7 @@
 
     
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    
     @RenderSection("scripts", required: false)
 
     <script>
@@ -67,20 +40,6 @@
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
     });
-
-    function InventoryDetailFunction() {
-        $.getJSON("@Url.Action("UpdateTables","UpdateDB", new { table = "InventoryDetail" })", function (data) {
-            console.log(data);
-            alert("load happened");
-        });
-    }
-
-    function InventoryFlushFunction() {
-        $.getJSON("@Url.Action("FlushInventory","Home", new { table = "InventoryDetail" })", function (data) {
-            console.log(data);
-            alert("load happened");
-        });
-    }
     </script>
 
 </body>

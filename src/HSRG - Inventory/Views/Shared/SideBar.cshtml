@@ -1,0 +1,74 @@
+﻿@model HSRG___Inventory.Models.TableTimestamps
+
+@{ 
+    
+}
+
+<div id="sidebar-wrapper" style="background : #fff">
+    
+    <ul class="sidebar-nav">
+        <li class="sidebar-brand" style="">
+            Table List
+        </li>
+        
+        @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
+        {
+            if (property.Name != "ID")
+            {
+                <li>
+                    <a href="#" onclick="return RefreshTable('@property.Name')">
+                        
+                        <p>@property.Name</p>
+                        <p>@property.GetValue(Model, null)</p>
+                    </a>
+                </li>
+            }
+
+        }
+    </ul>
+</div>
+<script>
+
+    function RefreshTable(table) {
+        FlushTableFunction(table);
+        ReloadTableFunction(table);
+    }
+
+        function FlushTableFunction(table) {
+            $.ajax({
+                url: '@Url.Action("FlushInventory","Home")' + '?table=' + table,
+                type: 'GET',
+                contentType: false,
+                dataType: 'text',
+                success: function (data) { alert("Table Flushed"); console.log(data) },
+                error: function (error) { alert(error) }
+            });
+        };
+
+        function ReloadTableFunction(table) {
+            $.ajax({
+                url: '@Url.Action("UpdateTables", "UpdateDB")' + '?table=' + table,
+                type: 'GET',
+                contentType: false,
+                dataType: 'text',
+                success: function (data) {
+                    alert("Table Reloaded");
+                    var test = data;
+                    console.log(data)
+                    $.post("@Url.Action("UpdateTime", "UpdateDB")", { result: test });
+
+                    /*$.ajax({
+                        type: "POST",
+                        url: ,
+                        data: "please accept this data",
+                        success: function () {alert("sent the time back")},
+                        dataType: 'text'
+                    });*/
+                },
+                error: function (error) { alert(error) }
+            });
+        };
+
+
+
+</script>

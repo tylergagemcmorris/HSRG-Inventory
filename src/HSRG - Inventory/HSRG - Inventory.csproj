@@ -200,7 +200,9 @@
     <Compile Include="Models\NetworkAdapters.cs" />
     <Compile Include="Models\SystemEnclosure.cs" />
     <Compile Include="Models\SystemInformation.cs" />
+    <Compile Include="Models\TableTimestamps.cs" />
     <Compile Include="Models\UpdatesInstalled.cs" />
+    <Compile Include="OutputFromUpdateTables.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -210,6 +212,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\simple-sidebar.css" />
+    <Content Include="Content\Sidebar.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -231,6 +234,15 @@
     <Content Include="App_Data\InventoryDetail-SQLiteTable.ps1" />
     <Content Include="App_Data\test.ps1" />
     <Content Include="App_Data\DatabaseScripts\InventoryDetail.ps1" />
+    <Content Include="App_Data\DatabaseScripts\BiosInformation.ps1" />
+    <Content Include="App_Data\DatabaseScripts\DriveSpace.ps1" />
+    <Content Include="App_Data\DatabaseScripts\HardDiskInformation.ps1" />
+    <Content Include="App_Data\DatabaseScripts\MemoryInformation.ps1" />
+    <Content Include="App_Data\DatabaseScripts\MotherBoardInformation.ps1" />
+    <Content Include="App_Data\DatabaseScripts\NetworkAdapters.ps1" />
+    <Content Include="App_Data\DatabaseScripts\SystemEnclosure.ps1" />
+    <Content Include="App_Data\DatabaseScripts\SystemInformation.ps1" />
+    <Content Include="App_Data\DatabaseScripts\UpdatesInstalled.ps1" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\Chart.bundle.js" />
@@ -279,6 +291,7 @@
     <Content Include="Views\Performance\Test.cshtml" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
+    <Content Include="Views\Shared\SideBar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\UpdateDB\" />

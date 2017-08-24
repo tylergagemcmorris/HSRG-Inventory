@@ -180,5 +180,14 @@ namespace HSRG___Inventory.Controllers
             ViewBag.Datapoints = JavaScriptConvert.SerializeObject(db.CPUPerformance.ToList());
             return View("~/Views/Performance/Test.cshtml");
         }
+
+        public ActionResult SideBar()
+        {
+            PropertyInfo[] properties = typeof(HSRG___Inventory.Models.TableTimestamps).GetProperties();
+            ViewBag.properties = properties;
+
+            var times = db.TableTimestamps;
+            return PartialView(times.First());
+        }
     }
 }

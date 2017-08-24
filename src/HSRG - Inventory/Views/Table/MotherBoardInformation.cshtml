@@ -2,28 +2,30 @@
 
 <div class="col-sm-9 col-sm-offset-1 col-md-7 col-md-offset-0 main">
     <h3 style="text-align: left">@ViewBag.Title</h3>
-    <table class="table-bordered table table-md table-condensed table-striped">
-        <tr>
-            @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
+    <div class="table-responsive">
+        <table class="table-bordered table table-md table-condensed table-striped">
+            <tr>
+                @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
             {
                 if (property.Name != "ComputerID")
                 {
-                    <th style="text-align: center">@property.Name</th>
+                        <th style="text-align: center">@property.Name</th>
+                    }
                 }
-            }
-        </tr>
+            </tr>
 
-        <tr>
+            <tr>
 
-            @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
+                @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
             {
                 if (property.Name != "ComputerID")
                 {
-                    <td style="text-align: center">@property.GetValue(Model, null)</td>
+                        <td style="text-align: center">@property.GetValue(Model, null)</td>
+                    }
                 }
-            }
-        </tr>
-    </table>
+            </tr>
+        </table>
+    </div>
 </div>
 
 
