@@ -19,7 +19,7 @@
                     <a href="#" onclick="return RefreshTable('@property.Name')">
                         
                         <p>@property.Name</p>
-                        <p>@property.GetValue(Model, null)</p>
+                        <p id="time">@property.GetValue(Model, null)</p>
                     </a>
                 </li>
             }
@@ -56,14 +56,8 @@
                     var test = data;
                     console.log(data)
                     $.post("@Url.Action("UpdateTime", "UpdateDB")", { result: test });
-
-                    /*$.ajax({
-                        type: "POST",
-                        url: ,
-                        data: "please accept this data",
-                        success: function () {alert("sent the time back")},
-                        dataType: 'text'
-                    });*/
+                    location.reload();
+                    Toggler(); //Doesn't work, attempting an ajax solution
                 },
                 error: function (error) { alert(error) }
             });
@@ -71,4 +65,25 @@
 
 
 
+</script>
+
+<script>
+        function Toggler()
+        {
+            $("#wrapper").toggleClass("toggled");
+        }
+</script>
+
+<script>
+        function ajaxupdatetime() //If I get it to work will update the text without having to reload the page
+        {
+            @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
+            {
+                if (property.Name != "ID")
+                {
+                    //$("#time").text(@property.GetValue(Model, null));
+                }
+
+            }
+        }
 </script>
