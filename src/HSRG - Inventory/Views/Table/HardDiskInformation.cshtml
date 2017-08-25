@@ -1,0 +1,29 @@
+﻿@model HSRG___Inventory.Models.HardDiskInformation
+
+<div class="col-sm-9 col-sm-offset-1 col-md-7 col-md-offset-0 main">
+    <h3 style="text-align: left">@ViewBag.Title</h3>
+    <div class="table-responsive">
+        <table class="table-bordered table table-md table-condensed table-striped">
+            <tr>
+                @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
+                {
+                    if (property.Name != "ComputerID")
+                    {
+                        <th style="text-align: center">@property.Name</th>
+                    }
+                }
+            </tr>
+
+            <tr>
+
+                @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
+                {
+                    if (property.Name != "ComputerID")
+                    {
+                        <td style="text-align: center">@property.GetValue(Model, null)</td>
+                    }
+                }
+            </tr>
+        </table>
+    </div>
+</div>

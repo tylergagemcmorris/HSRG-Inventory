@@ -15,8 +15,8 @@ namespace HSRG___Inventory.Models
         public string Model { get; set; }
         public string SerialNumber { get; set; }
         public string InterfaceType { get; set; }
-        public decimal Size { get; set; }
-        public int Partitions { get; set; }
+        public string Size { get; set; }
+        public string Partitions { get; set; }
 
     }
 }

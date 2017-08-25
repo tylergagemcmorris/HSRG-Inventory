@@ -1,37 +1,37 @@
-﻿@model HSRG___Inventory.Models.MemoryInformation
+﻿@model IEnumerable<HSRG___Inventory.Models.MemoryInformation>
 
-<div>
-    <table class="table-bordered">
-        <tr>
-            @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
-            {
-                if (property.Name != "ComputerID")
-                {
-                    <th>@property.Name</th>
-                }
-            }
-        </tr>
+@{ 
+    
+}
 
-        <tr>
-
-            @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
-            {
-                if (property.Name != "ComputerID")
-                {
-                    var words = property.GetValue(Model, null).ToString().Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
-                    <td>@words[0]</td>
-                }
-            }
-        </tr>
+<div class="col-sm-9 col-sm-offset-1 col-md-8 col-md-offset-0 main">
+    <h3 style="text-align: left">@ViewBag.Title</h3>
+    <div class="table-responsive">
+        <table class="table-bordered table table-md table-condensed table-striped">
             <tr>
                 @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
                 {
                     if (property.Name != "ComputerID")
                     {
-                        var words = property.GetValue(Model, null).ToString().Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
-                        <td>@words[1]</td>
+                        <th style="text-align: center">@property.Name</th>
                     }
                 }
             </tr>
-    </table>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
+                    {
+                        if (property.Name != "ComputerID")
+                        {
+                            <td style="text-align: center">@property.GetValue(item, null)</td>
+                        }
+                    }
+
+                </tr>
+            }
+        </table>
+    </div>
 </div>

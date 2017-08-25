@@ -12,6 +12,7 @@ namespace HSRG___Inventory.Models
     {
         [Key]
         public string ComputerID { get; set; }
+        public string Type { get; set; }
         public string Model { get; set; }
         [Column("CPU Info")]
         public string CPUInfo { get; set; }
@@ -25,7 +26,7 @@ namespace HSRG___Inventory.Models
         [Column("Drive Space - GB")]
         public string DriveSpace { get; set; }
         [Column("Total Physical Memory")]
-        public decimal TotalPhysicalMemory { get; set; }
+        public string TotalPhysicalMemory { get; set; }
         [Column("Last Reboot")]
         public DateTime LastReboot { get; set; }
     }

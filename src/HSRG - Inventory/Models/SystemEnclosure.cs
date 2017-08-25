@@ -14,14 +14,14 @@ namespace HSRG___Inventory.Models
         public string ComputerID { get; set; }
         public string Tag { get; set; }
         public string AudibleAlarm { get; set; }
-        public string ChassisType { get; set; }
+        public string ChassisTypes { get; set; }
         public string HeatGeneration { get; set; }
         public string HotSwappable { get; set; }
         public string InstallDate { get; set; }
         public string LockPresent { get; set; }
-        public decimal PoweredOn { get; set; }
-        public decimal PartNumber { get; set; }
-        public decimal SerialNumber { get; set; }
+        public string PoweredOn { get; set; }
+        public string PartNumber { get; set; }
+        public string SerialNumber { get; set; }
 
     }
 }

@@ -6,22 +6,41 @@
     <title>HSRG Inventory</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-</head>
-<body>
-    <div style="text-align: center">
-        <img src='https://business.lsu.edu/news/PublishingImages/ArticleImages/Logos/College/HSRG_Vert_Purple_Article_Image.jpg'>
-        <h1>HSRG - Inventory</h1>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p><b>Report was created on @DateTime.Now.ToLongDateString()</b></p>
-        </footer>
-    </div>
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+
+    <link href="~/Content/simple-sidebar.css" rel="stylesheet">
+</head>
+<body>
+    <div id="wrapper">
+        @Html.Action("Sidebar","Home")
+        <div id="page-content-wrapper">
+            <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+            <div style="text-align: center">
+                <img src='https://business.lsu.edu/news/PublishingImages/ArticleImages/Logos/College/HSRG_Vert_Purple_Article_Image.jpg'>
+                <h1>HSRG - Inventory</h1>
+            </div>
+            <div class="container-fluid">
+                @RenderBody()
+                <hr />
+                <footer>
+                    <p><b>Report was created on @DateTime.Now.ToLongDateString()</b></p>
+                </footer>
+            </div>
+        </div>
+    </div>
+
+    
+
+    
     @RenderSection("scripts", required: false)
+
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
+
 </body>
 </html>

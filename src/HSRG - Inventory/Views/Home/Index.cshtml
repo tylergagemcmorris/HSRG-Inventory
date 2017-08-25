@@ -1,4 +1,7 @@
 ﻿@model IEnumerable<HSRG___Inventory.Models.InventoryDetail>
+@using System.Text.RegularExpressions;
+@using Newtonsoft.Json;
+@using HSRG___Inventory.Models;
 
 @{
     ViewBag.Title = "Home Page";
@@ -12,31 +15,135 @@
     }
 </style>
 
-<div class="btn">
-    <input type="button" value="Computers" onclick="location.href='@Url.Action("Index", new { TypeFilter = "Computers" } ) '" />
-    <input type="button" value="Servers" onclick="location.href='@Url.Action("Index", new { TypeFilter = "Servers" } ) '" />
-</div>
+<div class="container-fluid">
 
-<div class="table-responsive">
-    <table class="table table-bordered table-condensed table-striped table-hover">
-        <tr>
-            @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
-            {
-                <th style="text-align: center" >@property.Name</th>
-            }
-        </tr>
-
-        @foreach (var item in Model)
+    <div class="row">
+        @using (Html.BeginForm())
         {
-            <tr class="clickable-row" onclick="document.location='@Url.Action("Details", "Home", new { id = item.ComputerID })';">
-               
-                @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
-               {
-                <td>@property.GetValue(item, null)</td>
-               }
-                
-            </tr>
+            <p>
+                Search: <br /> @Html.TextBox("searchitem")
+                <input type="submit" value="Go" class="btn btn-default btn-md" />
+            </p>
         }
-    </table>
+
+    </div>  
+
+    <div class="row">
+        <div class="button-wrapper">
+            <a href="@Url.Action("Index")" class="btn btn-default btn-md" role="button">All</a>
+            <a href="@Url.Action("Index", new { TypeFilter = "Clients" } )" class="btn btn-default btn-md" role="button">Clients</a>
+            <a href="@Url.Action("Index", new { TypeFilter = "Servers" } )" class="btn btn-default btn-md" role="button">Servers</a>
+        </div>
+    </div>        
+    
+    <div class="row">
+        <div class="table-responsive">
+            <table class="table table-md table-bordered table-condensed table-striped table-hover">
+                <tr>
+                    @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
+                    {
+                        <th style="text-align: center">@property.Name</th>
+                    }
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr class="clickable-row" onclick="document.location='@Url.Action("Details", "Home", new { id = item.ComputerID })';">
+
+                        @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
+                        {
+                            //When you want to remove the table, just copy what's inside the else, delete the if-else block, then paste.
+                            if (property.Name == "DriveSpace")
+                            {
+                                string test = property.GetValue(item, null).ToString();
+                                List<DriveTable> dt = JsonConvert.DeserializeObject<List<DriveTable>>((@property.GetValue(item, null).ToString()));
+                                <td style="text-align: center">
+                                    <table class="table-bordered table table-condensed table-striped">
+                                        <tr>
+                                            <th style="text-align: center">Drive</th>
+                                            <th style="text-align: center">Free</th>
+                                            <th style="text-align: center">Total</th>
+                                        </tr>
+
+                                        @foreach (var drive in dt)
+                                        {
+                                            <tr>
+                                                <td style="text-align: center">@drive.Drive</td>
+                                                <td style="text-align: center">@drive.Free</td>
+                                                <td style="text-align: center">@drive.Total</td>
+                                            </tr>
+                                        }
+                                    </table>
+                                </td>
+                            }
+                            else
+                            {
+                                <td style="vertical-align: middle; text-align: center">@property.GetValue(item, null)</td>
+                            }
+                        }
+
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>   
 </div>
 
+
+<script>
+
+
+    var myArray = [];
+
+    @foreach (var item in Model)
+    {
+        foreach (var prop in ViewBag.properties)
+        {
+            if(prop.Name == "DriveSpace")
+            {
+                @:myArray.push(JSON.stringify(@Html.Raw(prop.GetValue(item,null))));
+            }
+
+        }
+    }
+
+    console.log(myArray[0])
+
+    function buildHtmlTable(list, selector) {
+        var myList = list;
+        var columns = addAllColumnHeaders(myList, selector);
+
+        for (var i = 0; i < myList.length; i++) {
+            var row$ = $('<tr/>');
+            for (var colIndex = 0; colIndex < columns.length; colIndex++) {
+                var cellValue = myList[i][columns[colIndex]];
+                if (cellValue == null) cellValue = "";
+                row$.append($('<td/>').html(cellValue));
+            }
+            $(selector).append(row$);
+        }
+    }
+
+    // Adds a header row to the table and returns the set of columns.
+    // Need to do union of keys from all records as some records may not contain
+    // all records.
+    function addAllColumnHeaders(myList, selector) {
+        var columnSet = [];
+        var headerTr$ = $('<tr/>');
+
+        for (var i = 0; i < myList.length; i++) {
+            var rowHash = myList[i];
+            for (var key in rowHash) {
+                if ($.inArray(key, columnSet) == -1) {
+                    columnSet.push(key);
+                    headerTr$.append($('<th/>').html(key));
+                }
+            }
+        }
+        $(selector).append(headerTr$);
+
+        return columnSet;
+    }
+
+
+</script>
