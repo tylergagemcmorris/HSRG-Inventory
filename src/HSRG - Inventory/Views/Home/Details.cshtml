@@ -1,10 +1,44 @@
-﻿
+﻿<div class="button-wrapper" style="text-align:center">
+    <a href="@Url.Action("Index")" class="btn btn-default btn-md" role="button">Back to home</a>
+</div>
+
+<script>
+    function topFunction() {
+        document.body.scrollTop = 0; // For Chrome, Safari and Opera 
+        document.documentElement.scrollTop = 0; // For IE and Firefox
+    }
+</script>
+
+
 @{
     ViewBag.Title = "Details";
 }
-<h2>Computer name here</h2>
+<h2 style="background: center">@ViewBag.id</h2>
 <h3>@ViewBag.Message</h3>
 
-@Html.Action("PartialBios", new { id = ViewBag.id})
+<div class="container-fluid">
+    <div class="row">
+        @Html.Action("PartialUpdates", new { id = ViewBag.id })
+        <br />
+        @Html.Action("PartialMotherBoard", new { id = ViewBag.id })
+        <br />
+        @Html.Action("PartialBios", new { id = ViewBag.id })
+        <br />
+        @Html.Action("PartialSystem", new { id = ViewBag.id })
+        <br />
+        @Html.Action("PartialHardDisk", new { id = ViewBag.id })
+        <br />
+        @Html.Action("PartialDriveSpace", new { id = ViewBag.id })
+        <br />
+        @Html.Action("PartialNetwork", new { id = ViewBag.id })
+        <br />
+        @Html.Action("PartialMemory", new { id = ViewBag.id })
+        <br />
+        @Html.Action("PartialSystemEnclosure", new { id = ViewBag.id })
+    </div>
+</div>
 
-@Html.Action("PartialMemory", new { id = ViewBag.id })
+<div class="button-wrapper" style="text-align:center">
+    <button onclick="topFunction()" id="myBtn" title="Go to top" class="btn btn-default btn-md">Back to top</button>
+</div>
+

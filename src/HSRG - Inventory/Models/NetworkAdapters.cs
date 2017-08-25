@@ -12,6 +12,7 @@ namespace HSRG___Inventory.Models
     {
         [Key]
         public string ComputerID { get; set; }
+        [Key]
         public string Name { get; set; }
         public string Manufacturer { get; set; }
         public string Description { get; set; }
