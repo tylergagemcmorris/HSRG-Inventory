@@ -20,6 +20,12 @@
 <h2 style="background: center">@ViewBag.id</h2>
 <h3>@ViewBag.Message</h3>
 
+<div class="input-group input-daterange">
+    <input type="text" class="form-control" value="2012-04-05">
+    <div class="input-group-addon">to</div>
+    <input type="text" class="form-control" value="2012-04-19">
+</div>
+
 <div class="container-fluid">
     <div class="row">
         @Html.Action("PartialUpdates", new { id = ViewBag.id })
