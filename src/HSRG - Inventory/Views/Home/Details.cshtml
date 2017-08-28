@@ -9,7 +9,9 @@
         document.documentElement.scrollTop = 0; // For IE and Firefox
     }
 
-
+    $('.input-daterange input').each(function () {
+        $(this).datepicker('clearDates');
+    });
 
 </script>
 
@@ -20,35 +22,35 @@
 <h2 style="background: center">@ViewBag.id</h2>
 <h3>@ViewBag.Message</h3>
 
-<div class="input-group input-daterange">
-    <input type="text" class="form-control" value="2012-04-05">
-    <div class="input-group-addon">to</div>
-    <input type="text" class="form-control" value="2012-04-19">
-</div>
-
-<div class="container-fluid">
-    <div class="row">
-        @Html.Action("PartialUpdates", new { id = ViewBag.id })
-        <br />
-        @Html.Action("PartialMotherBoard", new { id = ViewBag.id })
-        <br />
-        @Html.Action("PartialBios", new { id = ViewBag.id })
-        <br />
-        @Html.Action("PartialSystem", new { id = ViewBag.id })
-        <br />
-        @Html.Action("PartialHardDisk", new { id = ViewBag.id })
-        <br />
-        @Html.Action("PartialDriveSpace", new { id = ViewBag.id })
-        <br />
-        @Html.Action("PartialNetwork", new { id = ViewBag.id })
-        <br />
-        @Html.Action("PartialMemory", new { id = ViewBag.id })
-        <br />
-        @Html.Action("PartialSystemEnclosure", new { id = ViewBag.id })
+    <div class="input-group input-daterange">
+        <input type="text" class="form-control" value="2012-04-05">
+        <div class="input-group-addon">to</div>
+        <input type="text" class="form-control" value="2012-04-19">
     </div>
-</div>
 
-<div class="button-wrapper" style="text-align:center">
-    <button onclick="topFunction()" id="myBtn" title="Go to top" class="btn btn-default btn-md">Back to top</button>
-</div>
+    <div class="container-fluid">
+        <div class="row">
+            @Html.Action("PartialUpdates", new { id = ViewBag.id })
+            <br />
+            @Html.Action("PartialMotherBoard", new { id = ViewBag.id })
+            <br />
+            @Html.Action("PartialBios", new { id = ViewBag.id })
+            <br />
+            @Html.Action("PartialSystem", new { id = ViewBag.id })
+            <br />
+            @Html.Action("PartialHardDisk", new { id = ViewBag.id })
+            <br />
+            @Html.Action("PartialDriveSpace", new { id = ViewBag.id })
+            <br />
+            @Html.Action("PartialNetwork", new { id = ViewBag.id })
+            <br />
+            @Html.Action("PartialMemory", new { id = ViewBag.id })
+            <br />
+            @Html.Action("PartialSystemEnclosure", new { id = ViewBag.id })
+        </div>
+    </div>
+
+    <div class="button-wrapper" style="text-align:center">
+        <button onclick="topFunction()" id="myBtn" title="Go to top" class="btn btn-default btn-md">Back to top</button>
+    </div>
 
