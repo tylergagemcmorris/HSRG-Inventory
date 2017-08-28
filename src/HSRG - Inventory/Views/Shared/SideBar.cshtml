@@ -1,7 +1,7 @@
 ﻿@model HSRG___Inventory.Models.TableTimestamps
 
 @{ 
-    
+
 }
 
 <div id="sidebar-wrapper" style="background : #fff">
@@ -10,20 +10,23 @@
         <li class="sidebar-brand" style="">
             Table List
         </li>
-        
-        @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
+        @if (true)
         {
-            if (property.Name != "ID")
+            int count = 0;
+            foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
             {
-                <li>
-                    <a href="#" onclick="return RefreshTable('@property.Name')">
-                        
-                        <p>@property.Name</p>
-                        <p id="time">@property.GetValue(Model, null)</p>
-                    </a>
-                </li>
-            }
+                if (property.Name != "ID")
+                {
+                    <li>
+                        <a href="#" onclick="return RefreshTable('@property.Name')">
 
+                            <p>@property.Name</p>
+                            <p id="@property.Name">@property.GetValue(Model, null)</p>
+                        </a>
+                    </li>
+                }
+                count++;
+            }
         }
     </ul>
 </div>
@@ -55,35 +58,11 @@
                     alert("Table Reloaded");
                     var test = data;
                     console.log(data)
+                    var data = JSON.parse(data);
+                    $('#' + data.Table).text(data.Time);
                     $.post("@Url.Action("UpdateTime", "UpdateDB")", { result: test });
-                    location.reload();
-                    Toggler(); //Doesn't work, attempting an ajax solution
                 },
                 error: function (error) { alert(error) }
             });
         };
-
-
-
-</script>
-
-<script>
-        function Toggler()
-        {
-            $("#wrapper").toggleClass("toggled");
-        }
-</script>
-
-<script>
-        function ajaxupdatetime() //If I get it to work will update the text without having to reload the page
-        {
-            @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
-            {
-                if (property.Name != "ID")
-                {
-                    //$("#time").text(@property.GetValue(Model, null));
-                }
-
-            }
-        }
 </script>
