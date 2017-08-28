@@ -118,7 +118,7 @@ namespace HSRG___Inventory.Controllers
             ViewBag.properties = properties;
             ViewBag.Title = "Hard Disk Information";
 
-            return PartialView("~/Views/Table/HardDiskInformation.cshtml", db.HardDiskInformation.First(s => s.ComputerID == id));
+            return PartialView("~/Views/Table/HardDiskInformation.cshtml", db.HardDiskInformation.Where(s => s.ComputerID == id));
         }
 
         [ChildActionOnly]
