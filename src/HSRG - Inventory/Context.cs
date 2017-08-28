@@ -24,6 +24,7 @@ namespace HSRG___Inventory
             modelBuilder.Entity<MemoryInformation>().HasKey(t => new { t.ComputerID, t.BankLabel });
             modelBuilder.Entity<NetworkAdapters>().HasKey(t => new { t.ComputerID, t.Name });
             modelBuilder.Entity<UpdatesInstalled>().HasKey(t => new { t.ComputerID, t.HotFixID });
+            modelBuilder.Entity<HardDiskInformation>().HasKey(t => new { t.ComputerID, t.Model });
         }
 
         public virtual DbSet<InventoryDetail> InventoryDetails { get; set; }
