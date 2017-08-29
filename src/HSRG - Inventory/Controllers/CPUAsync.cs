@@ -19,6 +19,7 @@ namespace HSRG___Inventory.Controllers
 {
     public class CPUAsync : AsyncController
     {
+        static private string CPUtest;
         public void DoWorkAsync()
         {
             string scriptpath = Server.MapPath("~/App_Data/test.ps1");
