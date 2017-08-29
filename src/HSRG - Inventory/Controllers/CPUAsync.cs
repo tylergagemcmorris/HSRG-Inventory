@@ -19,7 +19,7 @@ namespace HSRG___Inventory.Controllers
 {
     public class CPUAsync : AsyncController
     {
-        static private string CPUtest;
+        static public string CPUtest;
         public void DoWorkAsync()
         {
             string scriptpath = Server.MapPath("~/App_Data/test.ps1");
@@ -45,6 +45,7 @@ namespace HSRG___Inventory.Controllers
             {
                 Thread.Sleep(1);
                 string test = pipeline.Output.Read().ToString();
+                CPUtest = test;
                 AsyncManager.Parameters["Datapoints"] = test;
                 
                 AsyncManager.Finish();

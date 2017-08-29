@@ -2,6 +2,7 @@
 @using System.Text.RegularExpressions;
 @using Newtonsoft.Json;
 @using HSRG___Inventory.Models;
+@using HSRG___Inventory.Controllers;
 
 @{
     ViewBag.Title = "Home Page";
@@ -17,6 +18,13 @@
 
 <div class="container-fluid">
 
+    <div align="right">
+        @if (CPUAsync.CPUtest != null) //If CPUTest has a value
+        {
+            <a href="@Url.Action("Test")" class="btn btn-default btn-md" role="button">See most recent performance test</a>
+        }
+    </div>
+
     <div class="row">
         @using (Html.BeginForm())
         {
@@ -26,7 +34,7 @@
             </p>
         }
 
-    </div>  
+    </div>
 
     <div class="row">
         <div class="button-wrapper">
@@ -52,7 +60,6 @@
 
                         @foreach (System.Reflection.PropertyInfo property in ViewBag.properties)
                         {
-                            //When you want to remove the table, just copy what's inside the else, delete the if-else block, then paste.
                             if (property.Name == "DriveSpace")
                             {
                                 string test = property.GetValue(item, null).ToString();
