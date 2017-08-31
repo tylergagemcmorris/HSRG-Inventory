@@ -19,40 +19,6 @@ namespace HSRG___Inventory.Controllers
 {
     public class CPUAsync : AsyncController
     {
-        public void DoWorkAsync()
-        {
-            string scriptpath = Server.MapPath("~/App_Data/test.ps1");
-            //string DataSourcePath = Server.MapPath("~/App_Data/InventoryDetails.sqlite3");
-
-            
-            AsyncManager.OutstandingOperations.Increment();
-            RunspaceConfiguration runspaceConfiguration = RunspaceConfiguration.Create();
-            Runspace runspace = RunspaceFactory.CreateRunspace(runspaceConfiguration);
-            
-            runspace.Open();
-            RunspaceInvoke scriptInvoker = new RunspaceInvoke(runspace);
-            var pipeline = runspace.CreatePipeline();
-                
-            Command myCommand = new Command(scriptpath);
-            myCommand.Parameters.Add("SampleInterval", 1);
-            myCommand.Parameters.Add("MaxSamples", 10);
-            myCommand.Parameters.Add("DataSource", "abc");
-
-            pipeline.Commands.Add(myCommand);
-
-            pipeline.Output.DataReady += (sender, e) =>
-            {
-                Thread.Sleep(1);
-                string test = pipeline.Output.Read().ToString();
-                AsyncManager.Parameters["Datapoints"] = test;
-                
-                AsyncManager.Finish();
-            };
-
-            pipeline.InvokeAsync();
-            pipeline.Input.Close();
-            
-            
-        }
+        
     }
 }

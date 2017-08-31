@@ -23,11 +23,7 @@ namespace HSRG___Inventory.Controllers
         public static string data { get; private set; }
         private Context db = new Context("InventoryDetails");
 
-        public ActionResult DoWorkCompleted(string Datapoints)
-        {
-            data += Datapoints;
-            return Content(Datapoints);
-        }
+        
 
         [HttpPost]
         public void UpdateTime (string result)

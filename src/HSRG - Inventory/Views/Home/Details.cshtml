@@ -9,9 +9,7 @@
         document.documentElement.scrollTop = 0; // For IE and Firefox
     }
 
-    $('.input-daterange input').each(function () {
-        $(this).datepicker('clearDates');
-    });
+    $('.datepicker').datepicker();
 
 </script>
 
@@ -22,13 +20,18 @@
 <h2 style="background: center">@ViewBag.id</h2>
 <h3>@ViewBag.Message</h3>
 
-    <div class="input-group input-daterange">
-        <input type="text" class="form-control" value="2012-04-05">
-        <div class="input-group-addon">to</div>
-        <input type="text" class="form-control" value="2012-04-19">
-    </div>
+    
 
     <div class="container-fluid">
+        
+        <div class="row col-md-3">
+            <div class="input-group date" data-provide="datepicker">
+                <input type="text" class="form-control">
+                <div class="input-group-addon">
+                    <span class="glyphicon glyphicon-th"></span>
+                </div>
+            </div>
+        </div>
         <div class="row">
             @Html.Action("PartialUpdates", new { id = ViewBag.id })
             <br />
