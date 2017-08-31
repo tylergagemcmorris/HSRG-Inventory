@@ -9,7 +9,23 @@
         document.documentElement.scrollTop = 0; // For IE and Firefox
     }
 
-    $('.datepicker').datepicker();
+    $('.input-daterange input').each(function () {
+        $(this).datepicker('clearDates');
+    });
+
+    function checkDates()
+    {
+        var date1 = document.getElementById('Date1').value
+        var date2 = document.getElementById('Date2').value
+        if (/....-..-../.test(date1) && /....-..-../.test(date2))
+        {
+            alert("Correct Format");
+        }
+        else
+        {
+            alert("Incorrect Format");
+        }
+    }
 
 </script>
 
@@ -19,19 +35,16 @@
 }
 <h2 style="background: center">@ViewBag.id</h2>
 <h3>@ViewBag.Message</h3>
-
-    
+    <div class="input-group input-daterange" style="display:inline-block">
+        <input type="text" class="form-control" id="Date1" value="2012-04-05">
+        <div style="display:inline-block" class="input-group-addon">to</div>
+        <input type="text" class="form-control" id="Date2" value="2012-04-19">
+    </div>
+    <div style="display:inline-block">
+        <button onclick="checkDates()" id="myBtn" title="BeginTest" class="btn btn-default btn-md">Schedule Test</button>
+    </div>
 
     <div class="container-fluid">
-        
-        <div class="row col-md-3">
-            <div class="input-group date" data-provide="datepicker">
-                <input type="text" class="form-control">
-                <div class="input-group-addon">
-                    <span class="glyphicon glyphicon-th"></span>
-                </div>
-            </div>
-        </div>
         <div class="row">
             @Html.Action("PartialUpdates", new { id = ViewBag.id })
             <br />

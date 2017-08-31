@@ -81,7 +81,7 @@ namespace HSRG___Inventory.Controllers
         }
 
         
-        public ActionResult UpdateTablesCompleted(string Output, string Table, string Time)
+       public ActionResult UpdateTablesCompleted(string Output, string Table, string Time)
         {
             var TotalResult = new OutputFromUpdateTables { Table = Table, Time = Time, Result = Output };
             string Results = JsonConvert.SerializeObject(TotalResult);
