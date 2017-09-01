@@ -2,6 +2,24 @@
     <a href="@Url.Action("Index")" class="btn btn-default btn-md" role="button">Back to home</a>
 </div>
 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>jQuery UI Datepicker - Default functionality</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $("#Date1").datepicker();
+        });
+        $(function () {
+            $("#Date2").datepicker();
+        });
+    </script>
+</head>
+
 <script>
     function topFunction()
     {
@@ -17,7 +35,7 @@
     {
         var date1 = document.getElementById('Date1').value
         var date2 = document.getElementById('Date2').value
-        if (/....-..-../.test(date1) && /....-..-../.test(date2))
+        if (/\d\d\d\d\/\d\d\/\d\d/.test(date1) && /\d\d\d\d\/\d\d\/\d\d/.test(date2))
         {
             alert("Correct Format");
         }
@@ -35,14 +53,14 @@
 }
 <h2 style="background: center">@ViewBag.id</h2>
 <h3>@ViewBag.Message</h3>
-    <div class="input-group input-daterange" style="display:inline-block">
-        <input type="text" class="form-control" id="Date1" value="2012-04-05">
-        <div style="display:inline-block" class="input-group-addon">to</div>
-        <input type="text" class="form-control" id="Date2" value="2012-04-19">
+    <div class=" col-md-3 input-group input-daterange">
+        <input id="Date1">
+        <div class="input-group-addon">to</div>
+        <input type="text" id="Date2">
+
     </div>
-    <div style="display:inline-block">
-        <button onclick="checkDates()" id="myBtn" title="BeginTest" class="btn btn-default btn-md">Schedule Test</button>
-    </div>
+
+    <button onclick="checkDates()" id="myBtn" title="BeginTest" class="btn btn-default btn-md">Schedule Test</button>
 
     <div class="container-fluid">
         <div class="row">
